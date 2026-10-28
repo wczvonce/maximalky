@@ -14,10 +14,13 @@ const SETTINGS_ROWS = [
 
 // Prefilled GitHub forms for the private data repository and its token (the repository is picked on the token page).
 const REPO_URL = 'https://github.com/new?name=maximalky-data&visibility=private';
-const TOKEN_URL = 'https://github.com/settings/personal-access-tokens/new?name=Maximalky&description=Z%C3%A1loha%20appky%20Maxim%C3%A1lky&contents=write';
 
-// On <meno>.github.io the data repository is most likely <meno>/maximalky-data.
-const guessRepo = () => { const m = location.hostname.match(/^([^.]+)\.github\.io$/i); return m ? m[1] + '/maximalky-data' : ''; };
+// On <meno>.github.io the account is <meno> and the data repository most likely <meno>/maximalky-data.
+const pagesOwner = () => { const m = location.hostname.match(/^([^.]+)\.github\.io$/i); return m ? m[1] : ''; };
+const guessRepo = () => (pagesOwner() ? pagesOwner() + '/maximalky-data' : '');
+// A one-year token that may write repository contents; GitHub e-mails before it expires.
+const tokenUrl = () => 'https://github.com/settings/personal-access-tokens/new?name=Maximalky&description=Z%C3%A1loha%20appky%20Maxim%C3%A1lky'
+  + (pagesOwner() ? '&target_name=' + pagesOwner() : '') + '&expires_in=365&contents=write';
 
 const csvCell = (v) => {
   const s = typeof v === 'number' ? String(v).replace('.', ',') : String(v ?? '');
@@ -137,13 +140,13 @@ function GithubBackup() {
               <li>Na GitHube si vytvor súkromný (Private) repozitár, napríklad <strong>maximalky-data</strong>.</li>
               <li>Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token.</li>
               <li>Repository access: Only select repositories → ten repozitár. Permissions → Contents: Read and write.</li>
-              <li>Platnosť nastav čo najdlhšiu, token skopíruj a vlož sem. Ostane len v tomto telefóne.</li>
+              <li>Platnosť je nastavená na rok, GitHub ti pred koncom pošle e-mail. Token skopíruj a vlož sem. Ostane len v tomto telefóne.</li>
             </ol>
           )}
           {help && (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 8, marginTop: 10 }}>
               <a className="btn btn-secondary" href={REPO_URL} target="_blank" rel="noreferrer" style={{ minHeight: 44 }}>1 · Vytvoriť súkromný repozitár</a>
-              <a className="btn btn-secondary" href={TOKEN_URL} target="_blank" rel="noreferrer" style={{ minHeight: 44 }}>2 · Vytvoriť token</a>
+              <a className="btn btn-secondary" href={tokenUrl()} target="_blank" rel="noreferrer" style={{ minHeight: 44 }}>2 · Vytvoriť token</a>
             </div>
           )}
         </>

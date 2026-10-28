@@ -77,6 +77,7 @@ function Shell() {
   };
 
   const n = route.name;
+  const syncBroken = store.sync.status === 'error';
   let screen;
   if (n === 'zapis') screen = <Zapis />;
   else if (n === 'cviky') screen = <Cviky />;
@@ -95,7 +96,12 @@ function Shell() {
       <div className="app">
         <div className="topbar">
           <span className="brand">MAXIMÁLKY</span>
-          <button className="icon-btn" onClick={() => go('profil')} aria-label="Profil"><UserIcon /></button>
+          {syncBroken && (
+            <button className="tag tag-accent" onClick={() => go('profil')}
+              style={{ marginLeft: 'auto', border: 0, cursor: 'pointer', fontFamily: 'inherit' }}>záloha nefunguje</button>
+          )}
+          <button className="icon-btn" onClick={() => go('profil')} aria-label="Profil"
+            style={syncBroken ? { marginLeft: 10 } : undefined}><UserIcon /></button>
         </div>
 
         <div className="scroll" ref={scrollRef}>{screen}</div>
