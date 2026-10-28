@@ -8,9 +8,9 @@ Mobilná webová aplikácia (PWA) na zápis maximálok: kedy si sa testoval a ko
 
 ## Spustenie na mobile (GitHub Pages)
 
-1. Na GitHube vytvor **verejný** repozitár, napr. `maximalky`, a nahraj doň tento kód (vetva `main`).
-2. V repozitári: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-3. Po každom pushi na `main` workflow *Deploy* appku zostaví a zverejní na `https://<meno>.github.io/maximalky/`.
+1. Kód je vo verejnom repozitári `maximalky`, vetva `main`.
+2. Po každom pushi na `main` workflow *Deploy* appku zostaví a zverejní do vetvy `gh-pages`.
+3. GitHub Pages servíruje vetvu `gh-pages` na `https://<meno>.github.io/maximalky/` (ak by stránka nešla: Settings → Pages → Deploy from a branch → `gh-pages` / root).
 4. Adresu otvor v Chrome na Androide → menu ⋮ → **Inštalovať aplikáciu** (alebo *Pridať na plochu*). Potom sa otvára ako bežná aplikácia, aj offline.
 
 ## Záloha a synchronizácia cez GitHub

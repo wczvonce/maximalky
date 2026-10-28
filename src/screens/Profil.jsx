@@ -12,6 +12,12 @@ const SETTINGS_ROWS = [
   ['Prístup pre trénera', '—', 'v3'],
 ];
 
+// Prefills GitHub's token form; the repository itself is picked on that page.
+const TOKEN_URL = 'https://github.com/settings/personal-access-tokens/new?name=Maximalky&description=Z%C3%A1loha%20appky%20Maxim%C3%A1lky&contents=write';
+
+// On <meno>.github.io the data repository is most likely <meno>/maximalky-data.
+const guessRepo = () => { const m = location.hostname.match(/^([^.]+)\.github\.io$/i); return m ? m[1] + '/maximalky-data' : ''; };
+
 const csvCell = (v) => {
   const s = typeof v === 'number' ? String(v).replace('.', ',') : String(v ?? '');
   return /[;"\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
@@ -66,7 +72,7 @@ function GithubBackup() {
   const store = useStore();
   const app = useApp();
   const cfg = store.github;
-  const [repo, setRepo] = useState('');
+  const [repo, setRepo] = useState(guessRepo);
   const [token, setToken] = useState('');
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState(null);
@@ -133,6 +139,7 @@ function GithubBackup() {
               <li>Platnosť nastav čo najdlhšiu, token skopíruj a vlož sem. Ostane len v tomto telefóne.</li>
             </ol>
           )}
+          {help && <a className="btn btn-secondary" href={TOKEN_URL} target="_blank" rel="noreferrer" style={{ minHeight: 44, marginTop: 10 }}>Otvoriť GitHub · nový token</a>}
         </>
       )}
     </div>
