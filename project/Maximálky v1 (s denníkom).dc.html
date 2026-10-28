@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/modernist-ad220f67-3d98-4085-bf1a-2ba3ec7551e9/styles.css">
+<script src="_ds/modernist-ad220f67-3d98-4085-bf1a-2ba3ec7551e9/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<style>
+body{margin:0;background:var(--color-bg)}
+a{color:var(--color-accent);text-underline-offset:3px}
+a:hover{color:var(--color-accent-700)}
+.mx::-webkit-scrollbar{width:0;height:0}
+@keyframes mxpulse{0%,100%{opacity:1}50%{opacity:.35}}
+</style>
+</helmet>
+<div style="display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start;padding:36px 28px 72px;font-family:var(--font-body)">
+
+<div style="flex:0 0 auto">
+<x-import component-from-global-scope="AndroidDevice" from="./android-frame.jsx" hint-size="428px,908px">
+<div style="height:100%;display:flex;flex-direction:column;position:relative;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);overflow:hidden">
+
+<div style="display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:2px solid var(--color-divider);flex:none">
+<span style="font:800 14px/1 var(--font-heading);letter-spacing:.16em">MAXIMÁLKY</span>
+<button onClick="{{ goProfil }}" style="margin-left:auto;width:44px;height:44px;margin:-6px -10px -6px 0;display:flex;align-items:center;justify-content:center;background:transparent;border:0;cursor:pointer;color:var(--color-text)">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+</button>
+</div>
+
+<div class="mx" style="flex:1;overflow:auto;overscroll-behavior:contain">
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="Domov">
+<div style="background:var(--color-accent);color:var(--color-bg);padding:18px 16px 20px">
+<div style="font:400 10px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;opacity:.9">Nový rekord · 12. 10.</div>
+<div style="display:flex;align-items:baseline;gap:8px;margin-top:10px">
+<span style="font:800 54px/.9 var(--font-heading);letter-spacing:-.03em;font-variant-numeric:tabular-nums">117,5</span>
+<span style="font:800 20px/1 var(--font-heading)">kg</span>
+</div>
+<div style="font:400 13px/1.3 var(--font-body);margin-top:8px">Bench press · odhadované 1RM · 95 kg × 7</div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--color-divider)">
+<button onClick="{{ startTraining }}" style="min-height:64px;display:flex;align-items:center;padding:0 16px;background:var(--color-bg);border:0;cursor:pointer;font:800 15px/1.1 var(--font-heading);color:var(--color-text);text-align:left">Začať tréning</button>
+<button onClick="{{ goZapis }}" style="min-height:64px;display:flex;align-items:center;padding:0 16px;background:var(--color-bg);border:0;cursor:pointer;font:800 15px/1.1 var(--font-heading);color:var(--color-text);text-align:left">Zapísať maximálku</button>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider)">
+<div style="padding:12px 16px">
+<div style="font:800 26px/1 var(--font-heading);font-variant-numeric:tabular-nums">3</div>
+<div style="font:400 10px/1.2 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:5px">PR tento mesiac</div>
+</div>
+<div style="padding:12px 16px;border-left:1px solid var(--color-divider)">
+<div style="font:800 26px/1 var(--font-heading);font-variant-numeric:tabular-nums">11</div>
+<div style="font:400 10px/1.2 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:5px">Tréningov</div>
+</div>
+<div style="padding:12px 16px;border-left:1px solid var(--color-divider)">
+<div style="font:800 26px/1 var(--font-heading);font-variant-numeric:tabular-nums">84,2</div>
+<div style="font:400 10px/1.2 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:5px">Hmotnosť kg</div>
+</div>
+</div>
+
+<button onClick="{{ homeBench.open }}" style="width:100%;display:block;text-align:left;padding:16px 16px 14px;background:transparent;border:0;border-bottom:2px solid var(--color-divider);cursor:pointer;color:var(--color-text)">
+<div style="display:flex;align-items:baseline;gap:10px">
+<span style="font:800 11px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);flex:1">Bench press · vývoj 1RM</span>
+<span style="font:800 18px/1 var(--font-heading);font-variant-numeric:tabular-nums">{{ homeBench.max }} kg</span>
+</div>
+<svg viewBox="{{ homeChart.viewBox }}" style="width:100%;height:auto;display:block;margin-top:10px">
+<sc-for list="{{ homeChart.segs }}" as="s" hint-placeholder-count="12">
+<path d="{{ s.d }}" stroke="{{ s.color }}" stroke-width="2.5" fill="none"></path>
+</sc-for>
+<sc-for list="{{ homeChart.dots }}" as="d" hint-placeholder-count="12">
+<circle cx="{{ d.x }}" cy="{{ d.y }}" r="2.5" fill="{{ d.fill }}" stroke="var(--color-text)" stroke-width="1.5"></circle>
+</sc-for>
+</svg>
+<div style="display:flex;justify-content:space-between;font:400 11px/1 var(--font-body);color:var(--color-neutral-700);margin-top:8px;font-variant-numeric:tabular-nums">
+<span>{{ homeBench.count }}</span><span>{{ homeChart.pace }}</span>
+</div>
+</button>
+<div style="padding:18px 16px 4px">
+<div style="font:800 11px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Dlho netestované</div>
+</div>
+<sc-for list="{{ stale }}" as="s" hint-placeholder-count="3">
+<button onClick="{{ s.open }}" style="width:100%;min-height:56px;display:flex;align-items:center;gap:12px;padding:10px 16px;background:transparent;border:0;border-top:1px solid var(--color-divider);cursor:pointer;color:var(--color-text);text-align:left">
+<span style="font:800 15px/1.2 var(--font-heading);flex:1">{{ s.name }}</span>
+<span style="font:400 11px/1 var(--font-body);color:var(--color-neutral-700);font-variant-numeric:tabular-nums">{{ s.last }}</span>
+<span class="tag tag-accent" style="font-variant-numeric:tabular-nums">{{ s.weeks }} t.</span>
+</button>
+</sc-for>
+
+<div style="padding:22px 16px 4px">
+<div style="font:800 11px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Posledný tréning</div>
+</div>
+<button onClick="{{ goDennik }}" style="width:100%;display:block;padding:12px 16px 16px;background:transparent;border:0;border-top:1px solid var(--color-divider);cursor:pointer;color:var(--color-text);text-align:left">
+<div style="font:800 17px/1.2 var(--font-heading)">Streda 22. 10. · Tlak</div>
+<div style="display:flex;gap:18px;margin-top:10px;font-variant-numeric:tabular-nums">
+<span style="font:400 12px/1.2 var(--font-body);color:var(--color-neutral-700)">5 cvikov</span>
+<span style="font:400 12px/1.2 var(--font-body);color:var(--color-neutral-700)">24 sérií</span>
+<span style="font:400 12px/1.2 var(--font-body);color:var(--color-neutral-700)">8 450 kg objem</span>
+<span style="font:400 12px/1.2 var(--font-body);color:var(--color-neutral-700)">1:04 h</span>
+</div>
+</button>
+<div style="height:24px"></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isTrening }}">
+<div data-screen-label="Prebiehajúci tréning">
+<div style="padding:16px 16px 14px;border-bottom:2px solid var(--color-divider)">
+<div style="display:flex;align-items:baseline;gap:10px">
+<h1 style="font:800 28px/1 var(--font-heading);letter-spacing:-.02em;margin:0;flex:1">Tréning</h1>
+<span style="font:400 13px/1 var(--font-body);color:var(--color-neutral-700);font-variant-numeric:tabular-nums">27. 10. · 00:42:15</span>
+</div>
+<div style="display:flex;gap:16px;margin-top:10px;font-variant-numeric:tabular-nums">
+<span style="font:400 12px/1 var(--font-body);color:var(--color-neutral-700)">Objem {{ volume }} kg</span>
+<span style="font:400 12px/1 var(--font-body);color:var(--color-neutral-700)">{{ doneCount }}/{{ setCount }} sérií</span>
+</div>
+</div>
+
+<sc-if value="{{ rest }}">
+<div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--color-accent);color:var(--color-bg)">
+<span style="font:800 11px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;animation:mxpulse 1.6s infinite">Prestávka</span>
+<span style="font:800 22px/1 var(--font-heading);font-variant-numeric:tabular-nums;margin-left:auto">{{ restLabel }}</span>
+<button onClick="{{ skipRest }}" style="min-height:36px;padding:0 12px;background:transparent;border:1px solid var(--color-bg);color:var(--color-bg);font:800 12px/1 var(--font-heading);cursor:pointer">Preskočiť</button>
+</div>
+</sc-if>
+
+<sc-for list="{{ workout }}" as="ex" hint-placeholder-count="2">
+<div style="border-bottom:2px solid var(--color-divider)">
+<div style="display:flex;align-items:baseline;gap:10px;padding:14px 16px 10px">
+<span style="font:800 17px/1.1 var(--font-heading);flex:1">{{ ex.name }}</span>
+<span style="font:400 11px/1 var(--font-body);color:var(--color-neutral-700)">{{ ex.note }}</span>
+</div>
+<div style="display:grid;grid-template-columns:28px 1fr 74px 54px 48px;gap:0;padding:0 16px 6px;font:400 10px/1 var(--font-body);letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-700)">
+<span>#</span><span>Typ</span><span style="text-align:right">kg</span><span style="text-align:right">opak.</span><span></span>
+</div>
+<sc-for list="{{ ex.sets }}" as="s" hint-placeholder-count="5">
+<div style="display:grid;grid-template-columns:28px 1fr 74px 54px 48px;align-items:center;padding:7px 16px;border-top:1px solid var(--color-divider);background:{{ s.bg }}">
+<span style="font:800 13px/1 var(--font-heading);color:var(--color-neutral-700);font-variant-numeric:tabular-nums">{{ s.i }}</span>
+<span style="font:400 12px/1.2 var(--font-body);color:{{ s.typeColor }}">{{ s.type }}<span style="display:block;font-size:11px;color:var(--color-neutral-700);font-variant-numeric:tabular-nums">{{ s.prev }}</span></span>
+<span style="text-align:right;font:800 19px/1 var(--font-heading);font-variant-numeric:tabular-nums">{{ s.kg }}</span>
+<span style="text-align:right;font:800 15px/1 var(--font-heading);font-variant-numeric:tabular-nums;color:var(--color-neutral-700)">{{ s.reps }}</span>
+<button onClick="{{ s.toggle }}" style="justify-self:end;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:{{ s.checkBg }};border:2px solid {{ s.checkBorder }};color:{{ s.checkFg }}">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12.5 9.5 18 20 6.5"/></svg>
+</button>
+</div>
+</sc-for>
+<div style="display:flex;gap:8px;padding:10px 16px 14px;border-top:1px solid var(--color-divider)">
+<button onClick="{{ ex.addSet }}" class="btn btn-secondary" style="min-height:44px">+ séria</button>
+<button onClick="{{ ex.plates }}" class="btn btn-ghost" style="min-height:44px">Kotúče: {{ ex.plateLabel }}</button>
+</div>
+</div>
+</sc-for>
+
+<div style="padding:16px">
+<button onClick="{{ goDennik }}" class="btn btn-primary btn-block" style="min-height:52px;font-size:15px">Ukončiť tréning</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isZapis }}">
+<div data-screen-label="Zápis maximálky">
+<div style="padding:16px 16px 14px;border-bottom:2px solid var(--color-divider)">
+<h1 style="font:800 28px/1 var(--font-heading);letter-spacing:-.02em;margin:0">Zapísať maximálku</h1>
+<p style="font:400 12px/1.4 var(--font-body);color:var(--color-neutral-700);margin:8px 0 0">Jeden výkon k jednému dátumu. Dátum je predvolene dnes.</p>
+</div>
+
+<div style="display:flex;align-items:flex-end;gap:12px;padding:14px 16px;background:var(--color-surface);border-bottom:2px solid var(--color-divider)">
+<div style="flex:1">
+<div style="font:400 10px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Odhadované 1RM · {{ formulaName }}</div>
+<div style="display:flex;align-items:baseline;gap:6px;margin-top:8px">
+<span style="font:800 40px/.9 var(--font-heading);font-variant-numeric:tabular-nums;color:{{ e1rmColor }}">{{ e1rm }}</span>
+<span style="font:800 15px/1 var(--font-heading)">kg</span>
+</div>
+</div>
+<div style="text-align:right;font:400 11px/1.4 var(--font-body);color:var(--color-neutral-700)">{{ e1rmNote }}</div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--color-divider)">
+<button onClick="{{ goCviky }}" style="display:flex;align-items:center;gap:12px;min-height:60px;padding:10px 16px;background:transparent;border:0;cursor:pointer;color:var(--color-text);text-align:left">
+<span style="font:400 10px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);width:84px">Cvik</span>
+<span style="font:800 17px/1.1 var(--font-heading);flex:1">{{ form.ex }}</span>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 5 7 7-7 7"/></svg>
+</button>
+</div>
+<div style="display:flex;align-items:center;gap:12px;min-height:56px;padding:10px 16px;border-bottom:1px solid var(--color-divider)">
+<span style="font:400 10px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);width:84px">Dátum</span>
+<span style="font:800 17px/1.1 var(--font-heading);flex:1;font-variant-numeric:tabular-nums">27. 10. 2026</span>
+<span class="tag tag-neutral">dnes</span>
+</div>
+
+<div style="padding:16px;border-bottom:1px solid var(--color-divider)">
+<div style="font:400 10px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Váha (kg)</div>
+<div style="display:flex;align-items:center;gap:10px;margin-top:10px">
+<button onClick="{{ minusW }}" style="width:62px;height:62px;flex:none;background:var(--color-surface);border:2px solid var(--color-divider);cursor:pointer;font:800 18px/1 var(--font-heading);color:var(--color-text)">−{{ stepLabel }}</button>
+<div style="flex:1;text-align:center;font:800 42px/1 var(--font-heading);font-variant-numeric:tabular-nums">{{ form.weight }}</div>
+<button onClick="{{ plusW }}" style="width:62px;height:62px;flex:none;background:var(--color-accent);border:2px solid var(--color-accent);cursor:pointer;font:800 18px/1 var(--font-heading);color:var(--color-bg)">+{{ stepLabel }}</button>
+</div>
+</div>
+
+<div style="padding:16px;border-bottom:1px solid var(--color-divider)">
+<div style="font:400 10px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Opakovania</div>
+<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:2px;margin-top:10px;background:var(--color-divider);border:1px solid var(--color-divider)">
+<sc-for list="{{ repChoices }}" as="r" hint-placeholder-count="6">
+<button onClick="{{ r.pick }}" style="min-height:52px;background:{{ r.bg }};color:{{ r.fg }};border:0;cursor:pointer;font:800 18px/1 var(--font-heading);font-variant-numeric:tabular-nums">{{ r.n }}</button>
+</sc-for>
+</div>
+</div>
+
+<div style="padding:16px;border-bottom:1px solid var(--color-divider)">
+<div style="font:400 10px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Druh výkonu</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:10px;background:var(--color-divider);border:1px solid var(--color-divider)">
+<button onClick="{{ pickTested }}" style="min-height:48px;padding:0 12px;text-align:left;background:{{ kindA.bg }};color:{{ kindA.fg }};border:0;cursor:pointer;font:800 13px/1.15 var(--font-heading)">Testované 1RM</button>
+<button onClick="{{ pickRepmax }}" style="min-height:48px;padding:0 12px;text-align:left;background:{{ kindB.bg }};color:{{ kindB.fg }};border:0;cursor:pointer;font:800 13px/1.15 var(--font-heading)">Max na X opakovaní</button>
+</div>
+</div>
+
+<div style="padding:16px;border-bottom:1px solid var(--color-divider)">
+<div style="display:flex;align-items:baseline">
+<span style="font:400 10px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);flex:1">Náročnosť · RPE</span>
+<span style="font:800 15px/1 var(--font-heading);font-variant-numeric:tabular-nums">{{ form.rpe }}</span>
+</div>
+<div style="display:flex;gap:3px;margin-top:10px">
+<sc-for list="{{ rpeScale }}" as="p" hint-placeholder-count="10">
+<button onClick="{{ p.pick }}" style="flex:1;height:44px;border:0;cursor:pointer;background:{{ p.bg }}"></button>
+</sc-for>
+</div>
+<div style="font:400 11px/1.3 var(--font-body);color:var(--color-neutral-700);margin-top:8px">10 = už ani jedno opakovanie navyše</div>
+</div>
+
+<div style="padding:16px">
+<div class="field"><label>Poznámka</label>
+<input class="input" value="{{ form.note }}" onChange="{{ setNote }}" placeholder="napr. s pásom" style="min-height:44px">
+</div>
+<button onClick="{{ saveMax }}" class="btn btn-primary btn-block" style="min-height:56px;font-size:16px;margin-top:16px">Uložiť maximálku</button>
+<p style="font:400 11px/1.45 var(--font-body);color:var(--color-neutral-700);margin:12px 0 0">Uloží sa do telefónu aj bez signálu a odošle sa, keď je internet.</p>
+</div>
+<div style="height:16px"></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isCviky }}">
+<div data-screen-label="Cviky">
+<div style="padding:16px 16px 12px;border-bottom:1px solid var(--color-divider)">
+<div style="display:flex;align-items:baseline;gap:10px">
+<h1 style="font:800 28px/1 var(--font-heading);letter-spacing:-.02em;margin:0;flex:1">Cviky</h1>
+<span style="font:400 12px/1 var(--font-body);color:var(--color-neutral-700);font-variant-numeric:tabular-nums">{{ exCount }}</span>
+</div>
+<input class="input" value="{{ query }}" onChange="{{ setQuery }}" placeholder="Hľadať cvik" style="min-height:44px;margin-top:12px">
+</div>
+<div style="display:flex;gap:6px;padding:12px 16px;overflow:auto;border-bottom:2px solid var(--color-divider)">
+<sc-for list="{{ parties }}" as="p" hint-placeholder-count="6">
+<button onClick="{{ p.pick }}" style="flex:none;min-height:36px;padding:0 12px;cursor:pointer;border:1px solid {{ p.border }};background:{{ p.bg }};color:{{ p.fg }};font:400 12px/1 var(--font-body)">{{ p.name }}</button>
+</sc-for>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--color-divider);border-bottom:2px solid var(--color-divider)">
+<sc-for list="{{ exList }}" as="e" hint-placeholder-count="8">
+<button onClick="{{ e.open }}" style="display:block;text-align:left;padding:0 0 12px;background:var(--color-bg);border:0;cursor:pointer;color:var(--color-text)">
+<div style="height:92px;background:var(--color-neutral-200);display:flex;align-items:flex-end;padding:8px">
+<span style="font:400 10px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-800)">{{ e.party }}</span>
+</div>
+<div style="padding:10px 12px 0">
+<div style="font:800 14px/1.15 var(--font-heading);min-height:33px">{{ e.name }}</div>
+<div style="display:flex;align-items:baseline;gap:6px;margin-top:8px">
+<span style="font:800 20px/1 var(--font-heading);font-variant-numeric:tabular-nums">{{ e.maxLabel }}</span>
+<span style="font:800 14px/1 var(--font-heading);color:{{ e.trendColor }}">{{ e.trend }}</span>
+</div>
+</div>
+</button>
+</sc-for>
+</div>
+<div style="padding:16px">
+<button onClick="{{ goCviky }}" class="btn btn-secondary btn-block" style="min-height:48px">+ Pridať vlastný cvik</button>
+<p style="font:400 11px/1.45 var(--font-body);color:var(--color-neutral-700);margin:12px 0 0">Nepoužívaný cvik sa archivuje, nemaže — história a grafy zostanú.</p>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isDetail }}">
+<div data-screen-label="Detail cviku">
+<div style="position:relative;height:190px;background:var(--color-neutral-200)">
+<image-slot id="mx-cvik-hero" shape="rect" placeholder="Obrázok cviku — presuň sem"></image-slot>
+</div>
+<div style="padding:16px;border-bottom:2px solid var(--color-divider)">
+<div style="font:400 10px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-700)">{{ detail.party }}</div>
+<h1 style="font:800 30px/1 var(--font-heading);letter-spacing:-.02em;margin:8px 0 0">{{ detail.name }}</h1>
+<div style="display:flex;align-items:flex-end;gap:16px;margin-top:14px">
+<div style="flex:1">
+<div style="font:400 10px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Aktuálne 1RM</div>
+<div style="display:flex;align-items:baseline;gap:5px;margin-top:6px">
+<span style="font:800 36px/.9 var(--font-heading);font-variant-numeric:tabular-nums">{{ detail.maxLabel }}</span>
+<span style="font:800 14px/1 var(--font-heading)">{{ detail.unit }}</span>
+</div>
+</div>
+<div style="text-align:right;font:400 11px/1.5 var(--font-body);color:var(--color-neutral-700)">{{ detail.pace }}<br>{{ detail.lastLabel }}</div>
+</div>
+</div>
+
+<div style="padding:14px 16px 0">
+<div style="display:flex;align-items:center;gap:10px">
+<span style="font:800 11px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);flex:1">Vývoj odhadovaného 1RM</span>
+</div>
+<svg viewBox="{{ chart.viewBox }}" style="width:100%;height:auto;display:block;margin-top:12px;overflow:visible;font-family:var(--font-body)">
+<sc-for list="{{ chart.grid }}" as="g" hint-placeholder-count="4">
+<line x1="{{ chart.x0 }}" x2="{{ chart.x1 }}" y1="{{ g.y }}" y2="{{ g.y }}" stroke="var(--color-neutral-300)" stroke-width="1"></line>
+</sc-for>
+<sc-for list="{{ chart.grid }}" as="g" hint-placeholder-count="4">
+<text x="0" y="{{ g.ty }}" fill="var(--color-neutral-700)" font-size="10" style="font-variant-numeric:tabular-nums">{{ g.label }}</text>
+</sc-for>
+<path d="{{ chart.trend }}" stroke="var(--color-neutral-500)" stroke-width="1.5" stroke-dasharray="5 4" fill="none"></path>
+<sc-for list="{{ chart.segs }}" as="s" hint-placeholder-count="12">
+<path d="{{ s.d }}" stroke="{{ s.color }}" stroke-width="2.5" fill="none"></path>
+</sc-for>
+<sc-for list="{{ chart.dots }}" as="d" hint-placeholder-count="10">
+<circle cx="{{ d.x }}" cy="{{ d.y }}" r="4" fill="{{ d.fill }}" stroke="var(--color-text)" stroke-width="2"></circle>
+</sc-for>
+<sc-for list="{{ chart.recs }}" as="d" hint-placeholder-count="3">
+<rect x="{{ d.rx }}" y="{{ d.ry }}" width="9" height="9" fill="var(--color-accent)"></rect>
+</sc-for>
+<sc-for list="{{ chart.callouts }}" as="c" hint-placeholder-count="2">
+<text x="{{ c.x }}" y="{{ c.y }}" fill="{{ c.color }}" font-size="13" font-weight="800" text-anchor="{{ c.anchor }}" style="font-family:var(--font-heading);font-variant-numeric:tabular-nums">{{ c.label }}</text>
+</sc-for>
+<sc-for list="{{ chart.xticks }}" as="t" hint-placeholder-count="4">
+<text x="{{ t.x }}" y="{{ t.y }}" fill="var(--color-neutral-700)" font-size="10" text-anchor="{{ t.anchor }}" style="font-variant-numeric:tabular-nums">{{ t.label }}</text>
+</sc-for>
+</svg>
+<div style="display:flex;justify-content:space-between;font:400 11px/1 var(--font-body);color:var(--color-neutral-700);font-variant-numeric:tabular-nums;margin-top:6px">
+<span>Rozpätie {{ chart.rangeLabel }}</span><span>{{ chart.pace }}</span>
+</div>
+<div style="display:flex;gap:14px;margin-top:10px;font:400 11px/1.4 var(--font-body);color:var(--color-neutral-700);flex-wrap:wrap">
+<span style="color:var(--color-accent-700)">↑ Rast</span><span>↓ Pokles</span><span>● Testované</span><span>○ Zo sérií</span><span style="color:var(--color-accent-700)">■ Rekord</span><span>-- Trend</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:14px;background:var(--color-divider);border:1px solid var(--color-divider)">
+<sc-for list="{{ periods }}" as="p" hint-placeholder-count="5">
+<button onClick="{{ p.pick }}" style="min-height:40px;border:0;cursor:pointer;background:{{ p.bg }};color:{{ p.fg }};font:800 12px/1 var(--font-heading)">{{ p.name }}</button>
+</sc-for>
+</div>
+</div>
+
+<div style="padding:22px 16px 0">
+<div style="font:800 11px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Rep-maxy</div>
+<table class="table" style="margin-top:8px">
+<thead><tr><th style="padding-left:0">Opak.</th><th style="text-align:right">Váha</th><th style="text-align:right;padding-right:0">Kedy</th></tr></thead>
+<tbody>
+<sc-for list="{{ detail.repMaxes }}" as="r" hint-placeholder-count="5">
+<tr><td style="padding-left:0;font-weight:800;font-variant-numeric:tabular-nums">{{ r.reps }}</td><td style="text-align:right;font-variant-numeric:tabular-nums">{{ r.w }}</td><td style="text-align:right;padding-right:0;color:var(--color-neutral-700);font-variant-numeric:tabular-nums">{{ r.when }}</td></tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+
+<div style="padding:22px 16px 0">
+<div style="font:800 11px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">História</div>
+</div>
+<sc-for list="{{ detail.history }}" as="h" hint-placeholder-count="5">
+<div style="display:flex;align-items:center;gap:12px;padding:11px 16px;border-top:1px solid var(--color-divider);margin-top:0">
+<span style="font:400 12px/1 var(--font-body);color:var(--color-neutral-700);width:62px;font-variant-numeric:tabular-nums">{{ h.date }}</span>
+<span style="font:800 15px/1 var(--font-heading);flex:1;font-variant-numeric:tabular-nums">{{ h.perf }}</span>
+<span style="font:400 11px/1 var(--font-body);color:{{ h.tagColor }}">{{ h.tag }}</span>
+</div>
+</sc-for>
+<div style="padding:16px">
+<button onClick="{{ goZapis }}" class="btn btn-primary btn-block" style="min-height:52px;font-size:15px">Zapísať výkon</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isDennik }}">
+<div data-screen-label="Denník">
+<div style="padding:16px 16px 14px;border-bottom:2px solid var(--color-divider)">
+<h1 style="font:800 28px/1 var(--font-heading);letter-spacing:-.02em;margin:0">Denník</h1>
+<div style="display:flex;gap:16px;margin-top:10px;font-variant-numeric:tabular-nums">
+<span style="font:400 12px/1 var(--font-body);color:var(--color-neutral-700)">Október · 11 tréningov</span>
+<span style="font:400 12px/1 var(--font-body);color:var(--color-neutral-700)">82 t objem</span>
+</div>
+</div>
+<sc-for list="{{ journal }}" as="j" hint-placeholder-count="4">
+<button onClick="{{ j.open }}" style="width:100%;display:block;text-align:left;padding:14px 16px;background:transparent;border:0;border-bottom:1px solid var(--color-divider);cursor:pointer;color:var(--color-text)">
+<div style="display:flex;align-items:baseline;gap:10px">
+<span style="font:800 16px/1.1 var(--font-heading);flex:1">{{ j.title }}</span>
+<span style="font:400 11px/1 var(--font-body);color:var(--color-neutral-700);font-variant-numeric:tabular-nums">{{ j.date }}</span>
+</div>
+<div style="font:400 12px/1.5 var(--font-body);color:var(--color-neutral-700);margin-top:6px">{{ j.exercises }}</div>
+<div style="display:flex;gap:14px;margin-top:8px;font-variant-numeric:tabular-nums">
+<span style="font:400 11px/1 var(--font-body);color:var(--color-neutral-700)">{{ j.sets }} sérií</span>
+<span style="font:400 11px/1 var(--font-body);color:var(--color-neutral-700)">{{ j.volume }} kg</span>
+<span style="font:400 11px/1 var(--font-body);color:var(--color-accent-700)">{{ j.pr }}</span>
+</div>
+</button>
+</sc-for>
+<div style="height:24px"></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isGrafy }}">
+<div data-screen-label="Grafy">
+<div style="padding:16px 16px 14px;border-bottom:2px solid var(--color-divider)">
+<h1 style="font:800 28px/1 var(--font-heading);letter-spacing:-.02em;margin:0">Grafy</h1>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:14px;background:var(--color-divider);border:1px solid var(--color-divider)">
+<sc-for list="{{ periods }}" as="p" hint-placeholder-count="5">
+<button onClick="{{ p.pick }}" style="min-height:40px;border:0;cursor:pointer;background:{{ p.bg }};color:{{ p.fg }};font:800 12px/1 var(--font-heading)">{{ p.name }}</button>
+</sc-for>
+</div>
+</div>
+
+<div style="padding:18px 16px;border-bottom:1px solid var(--color-divider)">
+<div style="font:800 11px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Porovnanie cvikov · zlepšenie</div>
+<sc-for list="{{ compare }}" as="c" hint-placeholder-count="5">
+<div style="margin-top:12px">
+<div style="display:flex;align-items:baseline;gap:8px">
+<span style="font:400 12px/1 var(--font-body);flex:1">{{ c.name }}</span>
+<span style="font:800 13px/1 var(--font-heading);color:{{ c.color }};font-variant-numeric:tabular-nums">{{ c.label }}</span>
+</div>
+<div style="height:10px;background:var(--color-neutral-200);margin-top:5px">
+<div style="height:10px;width:{{ c.width }};background:{{ c.color }}"></div>
+</div>
+</div>
+</sc-for>
+</div>
+
+<div style="padding:18px 16px;border-bottom:1px solid var(--color-divider)">
+<div style="font:800 11px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Objem tréningov · tony za týždeň</div>
+<div style="display:flex;align-items:flex-end;gap:6px;height:120px;margin-top:14px;border-bottom:2px solid var(--color-divider)">
+<sc-for list="{{ volumeBars }}" as="b" hint-placeholder-count="10">
+<div style="flex:1;height:{{ b.h }};background:{{ b.color }}"></div>
+</sc-for>
+</div>
+<div style="display:flex;justify-content:space-between;font:400 11px/1 var(--font-body);color:var(--color-neutral-700);margin-top:6px">
+<span>T33</span><span>T43</span>
+</div>
+</div>
+
+<div style="padding:18px 16px;border-bottom:1px solid var(--color-divider)">
+<div style="font:800 11px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Relatívna sila · 84,2 kg</div>
+<sc-for list="{{ relative }}" as="r" hint-placeholder-count="3">
+<div style="display:flex;align-items:baseline;gap:10px;padding:10px 0;border-top:1px solid var(--color-divider)">
+<span style="font:400 13px/1 var(--font-body);flex:1">{{ r.name }}</span>
+<span style="font:800 20px/1 var(--font-heading);font-variant-numeric:tabular-nums">{{ r.x }}</span>
+<span style="font:400 11px/1 var(--font-body);color:var(--color-neutral-700)">telesnej váhy</span>
+</div>
+</sc-for>
+</div>
+
+<div style="padding:18px 16px 24px">
+<div style="font:800 11px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Kalendár aktivity</div>
+<div style="display:grid;grid-template-columns:repeat(18,1fr);gap:2px;margin-top:12px">
+<sc-for list="{{ calendar }}" as="c" hint-placeholder-count="54">
+<div style="aspect-ratio:1;background:{{ c.bg }}"></div>
+</sc-for>
+</div>
+<div style="display:flex;align-items:center;gap:6px;margin-top:10px;font:400 11px/1 var(--font-body);color:var(--color-neutral-700)">
+<span>Menej</span>
+<div style="width:10px;height:10px;background:var(--color-neutral-200)"></div>
+<div style="width:10px;height:10px;background:var(--color-accent-300)"></div>
+<div style="width:10px;height:10px;background:var(--color-accent-500)"></div>
+<div style="width:10px;height:10px;background:var(--color-accent)"></div>
+<span>Viac</span>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isProfil }}">
+<div data-screen-label="Profil">
+<div style="padding:16px 16px 14px;border-bottom:2px solid var(--color-divider)">
+<h1 style="font:800 28px/1 var(--font-heading);letter-spacing:-.02em;margin:0">Profil</h1>
+</div>
+<div style="padding:16px;border-bottom:1px solid var(--color-divider)">
+<div style="font:400 10px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Telesná hmotnosť</div>
+<div style="display:flex;align-items:center;gap:10px;margin-top:10px">
+<button onClick="{{ minusBw }}" style="width:56px;height:56px;flex:none;background:var(--color-surface);border:2px solid var(--color-divider);cursor:pointer;font:800 18px/1 var(--font-heading);color:var(--color-text)">−0,1</button>
+<div style="flex:1;text-align:center;font:800 34px/1 var(--font-heading);font-variant-numeric:tabular-nums">{{ bw }}</div>
+<button onClick="{{ plusBw }}" style="width:56px;height:56px;flex:none;background:var(--color-accent);border:2px solid var(--color-accent);cursor:pointer;font:800 18px/1 var(--font-heading);color:var(--color-bg)">+0,1</button>
+</div>
+</div>
+<div style="padding:16px;border-bottom:1px solid var(--color-divider)">
+<div style="display:flex;align-items:baseline;gap:10px">
+<span style="font:400 10px/1 var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700);flex:1">Cieľ · bench 120 kg do leta</span>
+<span class="tag tag-accent">v2</span>
+</div>
+<div style="height:14px;background:var(--color-neutral-200);margin-top:10px">
+<div style="height:14px;width:82%;background:var(--color-accent)"></div>
+</div>
+<div style="font:400 11px/1.4 var(--font-body);color:var(--color-neutral-700);margin-top:8px">Chýba 2,5 kg · pri tempe +1,4 kg/mesiac to vyjde do 15. 12.</div>
+</div>
+<div style="padding:16px 16px 6px">
+<div style="font:800 11px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Vzorec odhadu 1RM</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:10px;background:var(--color-divider);border:1px solid var(--color-divider)">
+<button onClick="{{ pickEpley }}" style="min-height:48px;padding:0 12px;text-align:left;background:{{ fA.bg }};color:{{ fA.fg }};border:0;cursor:pointer;font:800 13px/1 var(--font-heading)">Epley</button>
+<button onClick="{{ pickBrzycki }}" style="min-height:48px;padding:0 12px;text-align:left;background:{{ fB.bg }};color:{{ fB.fg }};border:0;cursor:pointer;font:800 13px/1 var(--font-heading)">Brzycki</button>
+</div>
+</div>
+<sc-for list="{{ settings }}" as="s" hint-placeholder-count="6">
+<div style="display:flex;align-items:center;gap:12px;min-height:56px;padding:10px 16px;border-top:1px solid var(--color-divider)">
+<span style="font:400 14px/1.2 var(--font-body);flex:1">{{ s.name }}</span>
+<span style="font:400 11px/1 var(--font-body);color:var(--color-neutral-700)">{{ s.value }}</span>
+<span class="tag tag-neutral">{{ s.ver }}</span>
+</div>
+</sc-for>
+<div style="padding:16px">
+<button onClick="{{ noop }}" class="btn btn-secondary btn-block" style="min-height:48px">Exportovať do CSV</button>
+<p style="font:400 11px/1.45 var(--font-body);color:var(--color-neutral-700);margin:12px 0 0">Dáta sú tvoje — export a záloha kedykoľvek.</p>
+</div>
+</div>
+</sc-if>
+
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(5,1fr);border-top:2px solid var(--color-divider);flex:none;background:var(--color-bg)">
+<button onClick="{{ goHome }}" style="min-height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:transparent;border:0;cursor:pointer;color:{{ nav.home }}">
+<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/></svg>
+<span style="font:400 9px/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase">Domov</span>
+</button>
+<button onClick="{{ goDennik }}" style="min-height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:transparent;border:0;cursor:pointer;color:{{ nav.dennik }}">
+<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
+<span style="font:400 9px/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase">Denník</span>
+</button>
+<button onClick="{{ toggleSheet }}" style="min-height:62px;display:flex;align-items:center;justify-content:center;background:var(--color-accent);border:0;cursor:pointer;color:var(--color-bg)">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+</button>
+<button onClick="{{ goCviky }}" style="min-height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:transparent;border:0;cursor:pointer;color:{{ nav.cviky }}">
+<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9v6M21 9v6M6.5 6.5v11M17.5 6.5v11M6.5 12h11"/></svg>
+<span style="font:400 9px/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase">Cviky</span>
+</button>
+<button onClick="{{ goGrafy }}" style="min-height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:transparent;border:0;cursor:pointer;color:{{ nav.grafy }}">
+<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20h18"/><path d="m4 15 5-6 4 4 6-8"/></svg>
+<span style="font:400 9px/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase">Grafy</span>
+</button>
+</div>
+
+<sc-if value="{{ toast }}">
+<div style="position:absolute;left:0;right:0;top:0;padding:14px 16px;background:var(--color-accent);color:var(--color-bg);display:flex;align-items:center;gap:12px;box-shadow:var(--shadow-md)">
+<span style="font:800 13px/1.25 var(--font-heading);flex:1">{{ toast }}</span>
+<button onClick="{{ clearToast }}" style="width:32px;height:32px;flex:none;background:transparent;border:1px solid var(--color-bg);color:var(--color-bg);cursor:pointer;font:800 13px/1 var(--font-heading)">✕</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ sheet }}">
+<div style="position:absolute;inset:0;background:color-mix(in srgb, var(--color-neutral-900) 55%, transparent);display:flex;flex-direction:column;justify-content:flex-end">
+<button onClick="{{ toggleSheet }}" style="flex:1;background:transparent;border:0;cursor:pointer"></button>
+<div style="background:var(--color-bg);border-top:2px solid var(--color-text)">
+<div style="padding:16px 16px 10px;font:800 11px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Čo zapisuješ</div>
+<button onClick="{{ goZapis }}" style="width:100%;min-height:72px;display:flex;align-items:center;gap:12px;padding:12px 16px;background:transparent;border:0;border-top:1px solid var(--color-divider);cursor:pointer;color:var(--color-text);text-align:left">
+<span style="flex:1"><span style="display:block;font:800 17px/1.2 var(--font-heading)">Zapísať maximálku</span><span style="display:block;font:400 12px/1.3 var(--font-body);color:var(--color-neutral-700);margin-top:4px">Jeden výkon, do 10 sekúnd</span></span>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 5 7 7-7 7"/></svg>
+</button>
+<button onClick="{{ startTraining }}" style="width:100%;min-height:72px;display:flex;align-items:center;gap:12px;padding:12px 16px;background:transparent;border:0;border-top:1px solid var(--color-divider);cursor:pointer;color:var(--color-text);text-align:left">
+<span style="flex:1"><span style="display:block;font:800 17px/1.2 var(--font-heading)">Začať tréning</span><span style="display:block;font:400 12px/1.3 var(--font-body);color:var(--color-neutral-700);margin-top:4px">Celý tréning so sériami</span></span>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 5 7 7-7 7"/></svg>
+</button>
+<div style="height:12px"></div>
+</div>
+</div>
+</sc-if>
+
+</div>
+</x-import>
+</div>
+
+<div style="flex:1 1 340px;min-width:280px;max-width:520px">
+<div style="font:400 10px/1 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-700)">Návrh · MVP</div>
+<h1 style="font:800 40px/1 var(--font-heading);letter-spacing:-.025em;margin:10px 0 0">Maximálky</h1>
+<p style="font:400 14px/1.55 var(--font-body);margin:12px 0 0;max-width:46ch">Osem obrazoviek z návrhu, postavené ako klikací prototyp v systéme Modernist. Zapisovanie, odškrtávanie sérií, prepínanie období aj výpočet 1RM fungujú naživo.</p>
+<hr class="hr">
+<div style="font:800 11px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Obrazovky</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:12px;background:var(--color-divider);border:1px solid var(--color-divider)">
+<button onClick="{{ goHome }}" style="min-height:52px;padding:0 12px;text-align:left;background:{{ railHome.bg }};color:{{ railHome.fg }};border:0;cursor:pointer;font:800 13px/1.15 var(--font-heading)">01 Domov</button>
+<button onClick="{{ startTraining }}" style="min-height:52px;padding:0 12px;text-align:left;background:{{ railTrening.bg }};color:{{ railTrening.fg }};border:0;cursor:pointer;font:800 13px/1.15 var(--font-heading)">02 Prebiehajúci tréning</button>
+<button onClick="{{ goZapis }}" style="min-height:52px;padding:0 12px;text-align:left;background:{{ railZapis.bg }};color:{{ railZapis.fg }};border:0;cursor:pointer;font:800 13px/1.15 var(--font-heading)">03 Zápis maximálky</button>
+<button onClick="{{ goCviky }}" style="min-height:52px;padding:0 12px;text-align:left;background:{{ railCviky.bg }};color:{{ railCviky.fg }};border:0;cursor:pointer;font:800 13px/1.15 var(--font-heading)">04 Cviky</button>
+<button onClick="{{ goDetail }}" style="min-height:52px;padding:0 12px;text-align:left;background:{{ railDetail.bg }};color:{{ railDetail.fg }};border:0;cursor:pointer;font:800 13px/1.15 var(--font-heading)">05 Detail cviku</button>
+<button onClick="{{ goDennik }}" style="min-height:52px;padding:0 12px;text-align:left;background:{{ railDennik.bg }};color:{{ railDennik.fg }};border:0;cursor:pointer;font:800 13px/1.15 var(--font-heading)">06 Denník</button>
+<button onClick="{{ goGrafy }}" style="min-height:52px;padding:0 12px;text-align:left;background:{{ railGrafy.bg }};color:{{ railGrafy.fg }};border:0;cursor:pointer;font:800 13px/1.15 var(--font-heading)">07 Grafy</button>
+<button onClick="{{ goProfil }}" style="min-height:52px;padding:0 12px;text-align:left;background:{{ railProfil.bg }};color:{{ railProfil.fg }};border:0;cursor:pointer;font:800 13px/1.15 var(--font-heading)">08 Profil</button>
+</div>
+
+<hr class="hr">
+<div style="font:800 11px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Predpoklady</div>
+<div style="display:grid;gap:0;margin-top:10px">
+<div style="padding:10px 0;border-top:1px solid var(--color-divider);font:400 13px/1.5 var(--font-body)">Dáta sú vymyslené, ale realistické — maximá, série aj grafy sedia na seba.</div>
+<div style="padding:10px 0;border-top:1px solid var(--color-divider);font:400 13px/1.5 var(--font-body)">Obrázky cvikov sú prázdne miesta. Na detaile cviku je plocha, do ktorej môžeš obrázok presunúť myšou.</div>
+<div style="padding:10px 0;border-top:1px solid var(--color-divider);font:400 13px/1.5 var(--font-body)">Svetlý režim, Android, jazyk slovenčina. Tmavý režim je ďalší krok.</div>
+<div style="padding:10px 0;border-top:1px solid var(--color-divider);font:400 13px/1.5 var(--font-body)">Funkcie v2 sú v návrhu len naznačené značkou, nie rozpracované.</div>
+</div>
+
+<hr class="hr">
+<div style="font:800 11px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Čo funguje naživo</div>
+<div style="display:grid;gap:0;margin-top:10px">
+<div style="padding:10px 0;border-top:1px solid var(--color-divider);font:400 13px/1.5 var(--font-body)">Zápis maximálky: váha po 2,5 kg, opakovania, RPE — 1RM sa prepočítava pri každom ťuknutí a po uložení ohlási rekord.</div>
+<div style="padding:10px 0;border-top:1px solid var(--color-divider);font:400 13px/1.5 var(--font-body)">Tréning: odškrtnutie série spustí časovač prestávky, pod každou sériou svieti „minule“.</div>
+<div style="padding:10px 0;border-top:1px solid var(--color-divider);font:400 13px/1.5 var(--font-body)">Cviky: filter podľa partie a vyhľadávanie nad 16 predvolenými cvikmi.</div>
+<div style="padding:10px 0;border-top:1px solid var(--color-divider);font:400 13px/1.5 var(--font-body)">Detail: graf s trendovou čiarou (lineárna regresia) a prepínanie obdobia.</div>
+</div>
+
+<hr class="hr">
+<div style="font:800 11px/1 var(--font-heading);letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-700)">Ďalšie kroky</div>
+<p style="font:400 13px/1.55 var(--font-body);color:var(--color-neutral-800);margin:10px 0 0">Doplniť tmavý režim pre posilku, rozkresliť pridanie vlastného cviku a šablóny tréningov, a vybrať štýl obrázkov cvikov. Potom má zmysel riešiť dátovú vrstvu a offline frontu.</p>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;formula&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Epley&quot;,&quot;Brzycki&quot;],&quot;default&quot;:&quot;Epley&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Výpočty&quot;},&quot;weightStep&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;2.5&quot;,&quot;5&quot;],&quot;default&quot;:&quot;2.5&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Výpočty&quot;},&quot;showGhostLast&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Tréning&quot;}}">
+const EX = [
+  { id:'bench', name:'Bench press', party:'Hrudník', max:117.5, unit:'kg', trend:'↑', weeks:0 },
+  { id:'dbinc', name:'Tlak s jednoručkami na šikmej lavici', party:'Hrudník', max:38, unit:'kg', trend:'↑', weeks:3 },
+  { id:'dipy', name:'Dipy na bradlách', party:'Hrudník', max:25, unit:'+kg', trend:'→', weeks:5 },
+  { id:'ohp', name:'Tlak nad hlavu', party:'Ramená', max:62.5, unit:'kg', trend:'↑', weeks:2 },
+  { id:'zhyby', name:'Zhyby', party:'Chrbát', max:30, unit:'+kg', trend:'↑', weeks:1 },
+  { id:'pritahy', name:'Príťahy v predklone', party:'Chrbát', max:95, unit:'kg', trend:'→', weeks:4 },
+  { id:'drep', name:'Drep', party:'Nohy', max:140, unit:'kg', trend:'↑', weeks:1 },
+  { id:'legpress', name:'Leg press', party:'Nohy', max:260, unit:'kg', trend:'↑', weeks:2 },
+  { id:'bulhar', name:'Bulharský drep', party:'Nohy', max:32.5, unit:'kg', trend:'↓', weeks:6 },
+  { id:'vypady', name:'Výpady', party:'Nohy', max:30, unit:'kg', trend:'→', weeks:7 },
+  { id:'mrtvy', name:'Mŕtvy ťah', party:'Zadná strana', max:175, unit:'kg', trend:'↑', weeks:2 },
+  { id:'rdl', name:'Rumunský mŕtvy ťah', party:'Zadná strana', max:130, unit:'kg', trend:'→', weeks:3 },
+  { id:'hip', name:'Hip thrust', party:'Zadok', max:160, unit:'kg', trend:'↑', weeks:4 },
+  { id:'lytka', name:'Výpony na lýtka', party:'Lýtka', max:120, unit:'kg', trend:'→', weeks:9 },
+  { id:'clean', name:'Power clean', party:'Celé telo', max:85, unit:'kg', trend:'↑', weeks:3 },
+  { id:'vyskok', name:'Výskok z miesta', party:'Výbušnosť', max:71, unit:'cm', trend:'↑', weeks:8 },
+];
+
+const BENCH = [
+  { d:'14. 3.', v:102, kind:'test', rec:false }, { d:'28. 3.', v:104, kind:'set', rec:false },
+  { d:'11. 4.', v:105, kind:'test', rec:true }, { d:'2. 5.', v:103, kind:'set', rec:false },
+  { d:'23. 5.', v:107, kind:'set', rec:false }, { d:'6. 6.', v:108, kind:'test', rec:true },
+  { d:'27. 6.', v:106, kind:'set', rec:false }, { d:'18. 7.', v:110, kind:'test', rec:true },
+  { d:'8. 8.', v:109, kind:'set', rec:false }, { d:'29. 8.', v:113, kind:'set', rec:true },
+  { d:'12. 9.', v:112, kind:'set', rec:false }, { d:'3. 10.', v:115, kind:'test', rec:true },
+  { d:'12. 10.', v:117.5, kind:'test', rec:true }, { d:'24. 10.', v:116, kind:'set', rec:false },
+];
+
+const PARTIES = ['Všetko','Hrudník','Chrbát','Ramená','Nohy','Zadná strana','Výbušnosť'];
+const PERIODS = [['1M',2],['3M',6],['6M',10],['1R',14],['Všetko',14]];
+
+const fmt = (n) => String(Math.round(n * 10) / 10).replace('.', ',');
+
+class Component extends DCLogic {
+  state = {
+    screen: 'home', sheet: false, toast: null,
+    party: 'Všetko', query: '', detailId: 'bench', period: '6M',
+    form: { ex: 'Bench press', weight: 110, reps: 3, kind: 'repmax', rpe: 9, note: '' },
+    formula: null, bw: 84.2, extra: [],
+    workout: [
+      { id:'bench', name:'Bench press', note:'Bench pyramída', sets:[
+        { type:'Rozcvička', kg:80, reps:8, prev:'80 × 8', done:true },
+        { type:'Pracovná', kg:90, reps:5, prev:'90 × 5', done:true },
+        { type:'Pracovná', kg:90, reps:5, prev:'90 × 4', done:true },
+        { type:'Pracovná', kg:100, reps:3, prev:'97,5 × 3', done:false },
+        { type:'Top séria', kg:110, reps:1, prev:'107,5 × 1', done:false },
+      ]},
+      { id:'pritahy', name:'Príťahy v predklone', note:'4 série', sets:[
+        { type:'Pracovná', kg:80, reps:8, prev:'80 × 8', done:false },
+        { type:'Pracovná', kg:85, reps:6, prev:'82,5 × 6', done:false },
+      ]},
+    ],
+    rest: 0,
+  };
+
+  componentDidMount() {
+    this._t = setInterval(() => {
+      if (this.state.rest > 0) this.setState(s => ({ rest: s.rest - 1 }));
+    }, 1000);
+  }
+  componentWillUnmount() { clearInterval(this._t); }
+
+  formulaName() { return this.state.formula || this.props.formula || 'Epley'; }
+  step() { return Number(this.props.weightStep || 2.5); }
+
+  est(m, r) {
+    if (this.formulaName() === 'Brzycki') return r >= 37 ? m : m * 36 / (37 - r);
+    return m * (1 + r / 30);
+  }
+
+  series(ex) {
+    if (ex.id === 'bench') return BENCH.concat(this.state.extra);
+    const labels = ['12. 5.','2. 6.','23. 6.','14. 7.','4. 8.','25. 8.','15. 9.','6. 10.'];
+    return labels.map((d, i) => {
+      const t = i / (labels.length - 1);
+      const noise = ((ex.name.charCodeAt(i % ex.name.length) % 5) - 2) * 0.012;
+      return { d, v: Math.round(ex.max * (0.88 + 0.12 * t + noise) * 2) / 2,
+        kind: i % 3 === 1 ? 'test' : 'set', rec: i === labels.length - 1 || i === 4 };
+    });
+  }
+
+  chart(pts, opts) {
+    const o = opts || {};
+    const axis = o.axis !== false;
+    const W = 360, H = o.h || 182;
+    const PL = axis ? 34 : 5, PR = axis ? 12 : 5, PT = axis ? 22 : 7, PB = axis ? 24 : 7;
+    const n = o.all ? pts.length : PERIODS.find(p => p[0] === this.state.period)[1];
+    const d = pts.slice(Math.max(0, pts.length - n));
+    const vs = d.map(p => p.v);
+    const rawLo = Math.min.apply(null, vs), rawHi = Math.max.apply(null, vs);
+    const pad = Math.max(2.5, (rawHi - rawLo) * 0.2);
+    const lo = Math.floor((rawLo - pad) / 5) * 5, hi = Math.ceil((rawHi + pad) / 5) * 5;
+    const x = i => d.length < 2 ? (PL + W - PR) / 2 : PL + i * (W - PL - PR) / (d.length - 1);
+    const y = v => PT + (hi - v) / (hi - lo || 1) * (H - PT - PB);
+    const line = d.map((p, i) => (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(p.v).toFixed(1)).join(' ');
+    const segs = d.slice(1).map((p, i) => ({
+      d: 'M' + x(i).toFixed(1) + ' ' + y(d[i].v).toFixed(1) + ' L' + x(i + 1).toFixed(1) + ' ' + y(p.v).toFixed(1),
+      color: p.v > d[i].v ? 'var(--color-accent)' : p.v < d[i].v ? 'var(--color-neutral-700)' : 'var(--color-neutral-500)',
+    }));
+    const mx = (d.length - 1) / 2, my = vs.reduce((a, b) => a + b, 0) / d.length;
+    let num = 0, den = 0;
+    d.forEach((p, i) => { num += (i - mx) * (p.v - my); den += (i - mx) * (i - mx); });
+    const slope = den ? num / den : 0;
+    const trend = 'M' + x(0).toFixed(1) + ' ' + y(my - slope * mx).toFixed(1) +
+      ' L' + x(d.length - 1).toFixed(1) + ' ' + y(my + slope * mx).toFixed(1);
+    const anchor = (px) => px < PL + 34 ? 'start' : px > W - PR - 34 ? 'end' : 'middle';
+    const iMax = vs.indexOf(rawHi), iLast = d.length - 1;
+    const callouts = [];
+    if (d.length) {
+      callouts.push({ x: x(iMax).toFixed(1), y: (y(rawHi) - 10).toFixed(1), anchor: anchor(x(iMax)),
+        label: fmt(rawHi), color: 'var(--color-accent-700)' });
+      if (iLast !== iMax) callouts.push({ x: x(iLast).toFixed(1), y: (y(d[iLast].v) - 10).toFixed(1),
+        anchor: anchor(x(iLast)), label: fmt(d[iLast].v), color: 'var(--color-text)' });
+    }
+    const every = Math.max(1, Math.ceil(d.length / 4));
+    const xticks = d.map((p, i) => ({ i, p })).filter(t => t.i % every === 0 || t.i === iLast)
+      .map(t => ({ x: x(t.i).toFixed(1), y: (H - 7).toFixed(1), anchor: anchor(x(t.i)), label: t.p.d }));
+    return {
+      line, trend, segs, callouts, xticks, viewBox: '0 0 ' + W + ' ' + H, x0: PL, x1: W - PR,
+      grid: [0, 1, 2, 3].map(i => ({
+        y: (PT + i * (H - PT - PB) / 3).toFixed(1),
+        ty: (PT + i * (H - PT - PB) / 3 + 4).toFixed(1),
+        label: fmt(hi - i * (hi - lo) / 3),
+      })),
+      dots: d.map((p, i) => ({ x: x(i).toFixed(1), y: y(p.v).toFixed(1),
+        fill: p.kind === 'test' ? 'var(--color-text)' : 'var(--color-bg)' })),
+      recs: d.filter(p => p.rec).map(p => {
+        const i = d.indexOf(p);
+        return { rx: (x(i) - 4.5).toFixed(1), ry: (y(p.v) - 22).toFixed(1) };
+      }),
+      first: d.length ? d[0].d : '', last: d.length ? d[d.length - 1].d : '',
+      rangeLabel: fmt(rawLo) + '–' + fmt(rawHi) + ' kg',
+      pace: (slope >= 0 ? '+' : '') + fmt(slope * 2) + ' kg / mesiac',
+    };
+  }
+
+  go(screen) { return () => this.setState({ screen, sheet: false }); }
+
+  renderVals() {
+    const s = this.state;
+    const go = this.go.bind(this);
+    const sel = (on) => on
+      ? { bg: 'var(--color-accent)', fg: 'var(--color-bg)' }
+      : { bg: 'var(--color-bg)', fg: 'var(--color-text)' };
+    const rail = (k) => s.screen === k
+      ? { bg: 'var(--color-text)', fg: 'var(--color-bg)' }
+      : { bg: 'var(--color-bg)', fg: 'var(--color-text)' };
+    const navC = (k) => s.screen === k ? 'var(--color-accent)' : 'var(--color-neutral-700)';
+
+    const detail = EX.find(e => e.id === s.detailId) || EX[0];
+    const pts = this.series(detail);
+    const chart = this.chart(pts);
+    const raw = this.est(s.form.weight, s.form.kind === 'tested' ? 1 : s.form.reps);
+    const e1rm = Math.round(raw * 2) / 2;
+    const over10 = s.form.reps > 10 && s.form.kind !== 'tested';
+
+    const q = s.query.trim().toLowerCase();
+    const exList = EX.filter(e =>
+      (s.party === 'Všetko' || e.party === s.party) &&
+      (!q || e.name.toLowerCase().indexOf(q) >= 0)
+    ).map(e => ({
+      name: e.name, party: e.party,
+      maxLabel: fmt(e.max) + (e.unit === '+kg' ? ' +kg' : ' ' + e.unit),
+      trend: e.trend,
+      trendColor: e.trend === '↑' ? 'var(--color-accent-700)' : e.trend === '↓' ? 'var(--color-neutral-700)' : 'var(--color-neutral-700)',
+      open: () => this.setState({ detailId: e.id, screen: 'detail' }),
+    }));
+
+    const allSets = s.workout.reduce((a, e) => a.concat(e.sets), []);
+    const volume = allSets.filter(x => x.done && x.type !== 'Rozcvička')
+      .reduce((a, x) => a + x.kg * x.reps, 0);
+
+    const weeks = [8.2, 9.4, 7.1, 10.3, 11.0, 6.4, 12.1, 10.8, 13.2, 9.6, 12.8];
+
+    return {
+      isHome: s.screen === 'home', isTrening: s.screen === 'trening', isZapis: s.screen === 'zapis',
+      isCviky: s.screen === 'cviky', isDetail: s.screen === 'detail', isDennik: s.screen === 'dennik',
+      isGrafy: s.screen === 'grafy', isProfil: s.screen === 'profil',
+      sheet: s.sheet, toast: s.toast, clearToast: () => this.setState({ toast: null }),
+      goHome: go('home'), goZapis: go('zapis'), goCviky: go('cviky'), goDennik: go('dennik'),
+      goGrafy: go('grafy'), goProfil: go('profil'), goDetail: go('detail'),
+      startTraining: go('trening'),
+      toggleSheet: () => this.setState(p => ({ sheet: !p.sheet })),
+      noop: () => {},
+      nav: { home: navC('home'), dennik: navC('dennik'), cviky: navC('cviky'), grafy: navC('grafy') },
+      railHome: rail('home'), railTrening: rail('trening'), railZapis: rail('zapis'),
+      railCviky: rail('cviky'), railDetail: rail('detail'), railDennik: rail('dennik'),
+      railGrafy: rail('grafy'), railProfil: rail('profil'),
+
+      stale: EX.filter(e => e.weeks >= 5).slice(0, 3).map(e => ({
+        name: e.name, weeks: e.weeks, last: fmt(e.max) + ' kg',
+        open: () => this.setState({ screen: 'zapis', form: Object.assign({}, s.form, { ex: e.name, weight: e.max }) }),
+      })),
+
+      workout: s.workout.map((ex, ei) => ({
+        name: ex.name, note: ex.note,
+        plateLabel: ex.sets.length ? this.plates(ex.sets[ex.sets.length - 1].kg) : '—',
+        addSet: () => this.setState(p => {
+          const w = p.workout.map(x => Object.assign({}, x, { sets: x.sets.slice() }));
+          const last = w[ei].sets[w[ei].sets.length - 1];
+          w[ei].sets.push(Object.assign({}, last, { done: false, type: 'Pracovná' }));
+          return { workout: w };
+        }),
+        plates: () => {},
+        sets: ex.sets.map((st, si) => ({
+          i: si + 1, type: st.type, kg: fmt(st.kg), reps: st.reps,
+          prev: this.props.showGhostLast === false ? '' : 'minule ' + st.prev,
+          bg: st.done ? 'var(--color-surface)' : 'var(--color-bg)',
+          typeColor: st.type === 'Rozcvička' ? 'var(--color-neutral-700)'
+            : st.type === 'Top séria' ? 'var(--color-accent-700)' : 'var(--color-text)',
+          checkBg: st.done ? 'var(--color-accent)' : 'transparent',
+          checkBorder: st.done ? 'var(--color-accent)' : 'var(--color-divider)',
+          checkFg: st.done ? 'var(--color-bg)' : 'var(--color-neutral-500)',
+          toggle: () => this.setState(p => {
+            const w = p.workout.map(x => Object.assign({}, x, { sets: x.sets.slice() }));
+            const t = !w[ei].sets[si].done;
+            w[ei].sets[si] = Object.assign({}, w[ei].sets[si], { done: t });
+            return { workout: w, rest: t ? 90 : p.rest };
+          }),
+        })),
+      })),
+      volume: volume.toLocaleString('sk-SK'),
+      doneCount: allSets.filter(x => x.done).length, setCount: allSets.length,
+      rest: s.rest > 0,
+      restLabel: String(Math.floor(s.rest / 60)) + ':' + String(s.rest % 60).padStart(2, '0'),
+      skipRest: () => this.setState({ rest: 0 }),
+
+      form: { ex: s.form.ex, weight: fmt(s.form.weight), note: s.form.note, rpe: s.form.rpe },
+      stepLabel: fmt(this.step()),
+      formulaName: this.formulaName(),
+      e1rm: fmt(e1rm),
+      e1rmColor: over10 ? 'var(--color-neutral-700)' : 'var(--color-text)',
+      e1rmNote: over10 ? 'nad 10 opakovaní je odhad menej spoľahlivý'
+        : fmt(s.form.weight) + ' kg × ' + (s.form.kind === 'tested' ? 1 : s.form.reps),
+      minusW: () => this.setState(p => ({ form: Object.assign({}, p.form, { weight: Math.max(0, p.form.weight - this.step()) }) })),
+      plusW: () => this.setState(p => ({ form: Object.assign({}, p.form, { weight: p.form.weight + this.step() }) })),
+      repChoices: [1, 2, 3, 5, 8, 10].map(n => Object.assign({ n,
+        pick: () => this.setState(p => ({ form: Object.assign({}, p.form, { reps: n }) })) },
+        sel(s.form.reps === n && s.form.kind !== 'tested'))),
+      kindA: sel(s.form.kind === 'tested'), kindB: sel(s.form.kind === 'repmax'),
+      pickTested: () => this.setState(p => ({ form: Object.assign({}, p.form, { kind: 'tested' }) })),
+      pickRepmax: () => this.setState(p => ({ form: Object.assign({}, p.form, { kind: 'repmax' }) })),
+      rpeScale: [1,2,3,4,5,6,7,8,9,10].map(n => ({
+        bg: n <= s.form.rpe ? (n > 8 ? 'var(--color-accent)' : 'var(--color-accent-400)') : 'var(--color-neutral-200)',
+        pick: () => this.setState(p => ({ form: Object.assign({}, p.form, { rpe: n }) })),
+      })),
+      setNote: (e) => this.setState(p => ({ form: Object.assign({}, p.form, { note: e.target.value }) })),
+      saveMax: () => {
+        const best = Math.max.apply(null, BENCH.concat(s.extra).map(p => p.v));
+        const rec = e1rm > best;
+        this.setState({
+          screen: 'detail', detailId: 'bench', period: '6M',
+          extra: rec ? s.extra.concat([{ d: '27. 10.', v: e1rm, kind: 'test', rec: true }]) : s.extra,
+          toast: rec ? 'Nový rekord · ' + fmt(e1rm) + ' kg odhadované 1RM'
+            : 'Uložené · ' + fmt(e1rm) + ' kg, rekord ostáva ' + fmt(best) + ' kg',
+        });
+      },
+
+      query: s.query,
+      setQuery: (e) => this.setState({ query: e.target.value }),
+      parties: PARTIES.map(name => ({ name,
+        bg: s.party === name ? 'var(--color-text)' : 'transparent',
+        fg: s.party === name ? 'var(--color-bg)' : 'var(--color-text)',
+        border: s.party === name ? 'var(--color-text)' : 'var(--color-divider)',
+        pick: () => this.setState({ party: name }),
+      })),
+      exList, exCount: exList.length + ' cvikov',
+
+      detail: {
+        name: detail.name, party: detail.party, unit: detail.unit === '+kg' ? 'kg navyše' : detail.unit,
+        maxLabel: fmt(Math.max.apply(null, pts.map(p => p.v))),
+        pace: chart.pace, lastLabel: 'posledne ' + pts[pts.length - 1].d,
+        repMaxes: [
+          { reps: 1, w: fmt(detail.max) + ' kg', when: '12. 10.' },
+          { reps: 3, w: fmt(detail.max * 0.92) + ' kg', when: '5. 10.' },
+          { reps: 5, w: fmt(detail.max * 0.86) + ' kg', when: '21. 9.' },
+          { reps: 8, w: fmt(detail.max * 0.76) + ' kg', when: '3. 8.' },
+          { reps: 10, w: fmt(detail.max * 0.71) + ' kg', when: '14. 7.' },
+        ],
+        history: pts.slice().reverse().slice(0, 6).map(p => ({
+          date: p.d, perf: fmt(p.v) + ' kg · ' + (p.kind === 'test' ? 'testované' : 'zo série'),
+          tag: p.rec ? 'rekord' : '', tagColor: 'var(--color-accent-700)',
+        })),
+      },
+      chart,
+      homeChart: this.chart(this.series(EX[0]), { axis: false, h: 76, all: true }),
+      homeBench: {
+        max: fmt(Math.max.apply(null, this.series(EX[0]).map(p => p.v))),
+        count: this.series(EX[0]).length + ' zápisov · od 14. 3.',
+        open: () => this.setState({ detailId: 'bench', screen: 'detail', period: 'Všetko' }),
+      },
+      periods: PERIODS.map(p => Object.assign({ name: p[0],
+        pick: () => this.setState({ period: p[0] }) }, sel(s.period === p[0]))),
+
+      journal: [
+        { title:'Tlak', date:'22. 10.', exercises:'Bench press · Tlak nad hlavu · Dipy · Príťahy · Lýtka', sets:24, volume:'8 450', pr:'1 PR', open: go('trening') },
+        { title:'Nohy', date:'19. 10.', exercises:'Drep · Leg press · Bulharský drep · Hip thrust', sets:21, volume:'14 200', pr:'', open: go('trening') },
+        { title:'Ťah', date:'15. 10.', exercises:'Mŕtvy ťah · Zhyby · Príťahy · Rumunský mŕtvy ťah', sets:19, volume:'11 980', pr:'2 PR', open: go('trening') },
+        { title:'Test maximálok', date:'12. 10.', exercises:'Bench press 117,5 kg · Drep 140 kg', sets:6, volume:'2 310', pr:'2 PR', open: go('detail') },
+      ],
+
+      compare: [
+        { name:'Zhyby', label:'+18 %', width:'100%', color:'var(--color-accent)' },
+        { name:'Drep', label:'+12 %', width:'67%', color:'var(--color-accent)' },
+        { name:'Bench press', label:'+7 %', width:'39%', color:'var(--color-accent-500)' },
+        { name:'Mŕtvy ťah', label:'+4 %', width:'22%', color:'var(--color-accent-500)' },
+        { name:'Tlak nad hlavu', label:'−2 %', width:'11%', color:'var(--color-neutral-700)' },
+      ],
+      volumeBars: weeks.map((v, i) => ({
+        h: Math.round(v / 14 * 100) + '%',
+        color: i === weeks.length - 1 ? 'var(--color-accent)' : 'var(--color-neutral-400)',
+      })),
+      relative: [
+        { name:'Drep', x:'1,66×' }, { name:'Mŕtvy ťah', x:'2,08×' }, { name:'Bench press', x:'1,40×' },
+      ],
+      calendar: Array.from({ length: 54 }, (_, i) => {
+        const lvl = (i * 7 + 3) % 11;
+        return { bg: lvl > 8 ? 'var(--color-accent)' : lvl > 6 ? 'var(--color-accent-500)'
+          : lvl > 4 ? 'var(--color-accent-300)' : 'var(--color-neutral-200)' };
+      }),
+
+      bw: fmt(s.bw),
+      minusBw: () => this.setState(p => ({ bw: Math.round((p.bw - 0.1) * 10) / 10 })),
+      plusBw: () => this.setState(p => ({ bw: Math.round((p.bw + 0.1) * 10) / 10 })),
+      fA: sel(this.formulaName() === 'Epley'), fB: sel(this.formulaName() === 'Brzycki'),
+      pickEpley: () => this.setState({ formula: 'Epley' }),
+      pickBrzycki: () => this.setState({ formula: 'Brzycki' }),
+      settings: [
+        { name:'Šablóny tréningov', value:'3 uložené', ver:'MVP' },
+        { name:'Jednotky', value:'kg', ver:'MVP' },
+        { name:'Offline fronta', value:'prázdna', ver:'MVP' },
+        { name:'Pripomienka testu', value:'vypnuté', ver:'v2' },
+        { name:'Fázy sezóny a turnaje', value:'—', ver:'v2' },
+        { name:'Prístup pre trénera', value:'—', ver:'v3' },
+      ],
+    };
+  }
+
+  plates(kg) {
+    let side = (kg - 20) / 2;
+    if (side <= 0) return 'prázdna tyč';
+    const out = [];
+    [25, 20, 15, 10, 5, 2.5, 1.25].forEach(p => {
+      while (side >= p - 0.001) { out.push(fmt(p)); side -= p; }
+    });
+    return out.join(' + ') + ' / strana';
+  }
+}
+</script>
+</body>
+</html>

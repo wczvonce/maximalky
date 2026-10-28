@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/modernist-ad220f67-3d98-4085-bf1a-2ba3ec7551e9/styles.css">
+<script src="_ds/modernist-ad220f67-3d98-4085-bf1a-2ba3ec7551e9/_ds_bundle.js"></script>
+</helmet>
+<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:6px;box-sizing:border-box">
+
+<sc-if value="{{ isBench }}" hint-placeholder-val="{{ true }}">
+<svg viewBox="0 0 64 48" style="width:100%;height:100%;max-height:100%;display:block" preserveAspectRatio="xMidYMid meet" fill="none" stroke="var(--color-text)" stroke-width="2">
+<rect x="16" y="30" width="32" height="4"></rect>
+<path d="M20 34v10M44 34v10"></path>
+<path d="M6 18h52"></path>
+<rect x="8" y="10" width="5" height="16" fill="var(--color-accent)" stroke="none"></rect>
+<rect x="51" y="10" width="5" height="16" fill="var(--color-accent)" stroke="none"></rect>
+<path d="M24 30V20M40 30V20"></path>
+</svg>
+</sc-if>
+
+<sc-if value="{{ isDbinc }}">
+<svg viewBox="0 0 64 48" style="width:100%;height:100%;max-height:100%;display:block" preserveAspectRatio="xMidYMid meet" fill="none" stroke="var(--color-text)" stroke-width="2">
+<path d="M12 42 42 20"></path>
+<path d="M14 42v4M40 24v8"></path>
+<path d="M44 10h12M44 24h12"></path>
+<rect x="43" y="5" width="4" height="10" fill="var(--color-accent)" stroke="none"></rect>
+<rect x="55" y="5" width="4" height="10" fill="var(--color-accent)" stroke="none"></rect>
+<rect x="43" y="19" width="4" height="10" fill="var(--color-accent)" stroke="none"></rect>
+<rect x="55" y="19" width="4" height="10" fill="var(--color-accent)" stroke="none"></rect>
+</svg>
+</sc-if>
+
+<sc-if value="{{ isDipy }}">
+<svg viewBox="0 0 64 48" style="width:100%;height:100%;max-height:100%;display:block" preserveAspectRatio="xMidYMid meet" fill="none" stroke="var(--color-text)" stroke-width="2">
+<path d="M14 10v34M50 10v34"></path>
+<path d="M14 12h10M40 12h10" stroke="var(--color-accent)"></path>
+<circle cx="32" cy="18" r="4"></circle>
+<path d="M32 22v12M26 14l6 10M38 14l-6 10M32 34l-5 8M32 34l5 8"></path>
+</svg>
+</sc-if>
+
+<sc-if value="{{ isOhp }}">
+<svg viewBox="0 0 64 48" style="width:100%;height:100%;max-height:100%;display:block" preserveAspectRatio="xMidYMid meet" fill="none" stroke="var(--color-text)" stroke-width="2">
+<path d="M8 10h48"></path>
+<rect x="6" y="4" width="5" height="12" fill="var(--color-accent)" stroke="none"></rect>
+<rect x="53" y="4" width="5" height="12" fill="var(--color-accent)" stroke="none"></rect>
+<circle cx="32" cy="24" r="4"></circle>
+<path d="M26 26 22 10M38 26l4-16M32 28v10M32 38l-5 8M32 38l5 8"></path>
+</svg>
+</sc-if>
+
+<sc-if value="{{ isZhyby }}">
+<svg viewBox="0 0 64 48" style="width:100%;height:100%;max-height:100%;display:block" preserveAspectRatio="xMidYMid meet" fill="none" stroke="var(--color-text)" stroke-width="2">
+<path d="M6 8h52"></path>
+<path d="M24 8v8M40 8v8" stroke="var(--color-accent)"></path>
+<circle cx="32" cy="22" r="4"></circle>
+<path d="M24 16l8 6M40 16l-8 6M32 26v10M32 36l-6 8M32 36l6 8"></path>
+</svg>
+</sc-if>
+
+<sc-if value="{{ isPritahy }}">
+<svg viewBox="0 0 64 48" style="width:100%;height:100%;max-height:100%;display:block" preserveAspectRatio="xMidYMid meet" fill="none" stroke="var(--color-text)" stroke-width="2">
+<path d="M12 16 38 24"></path>
+<circle cx="8" cy="15" r="4"></circle>
+<path d="M38 24v18M30 20v12"></path>
+<path d="M18 32h26"></path>
+<rect x="16" y="26" width="4" height="12" fill="var(--color-accent)" stroke="none"></rect>
+<rect x="44" y="26" width="4" height="12" fill="var(--color-accent)" stroke="none"></rect>
+</svg>
+</sc-if>
+
+<sc-if value="{{ isDrep }}">
+<svg viewBox="0 0 64 48" style="width:100%;height:100%;max-height:100%;display:block" preserveAspectRatio="xMidYMid meet" fill="none" stroke="var(--color-text)" stroke-width="2">
+<path d="M8 14h48"></path>
+<rect x="6" y="8" width="5" height="12" fill="var(--color-accent)" stroke="none"></rect>
+<rect x="53" y="8" width="5" height="12" fill="var(--color-accent)" stroke="none"></rect>
+<circle cx="32" cy="22" r="4"></circle>
+<path d="M32 26v6M32 32l-8 6 2 6M32 32l8 6-2 6"></path>
+</svg>
+</sc-if>
+
+<sc-if value="{{ isLegpress }}">
+<svg viewBox="0 0 64 48" style="width:100%;height:100%;max-height:100%;display:block" preserveAspectRatio="xMidYMid meet" fill="none" stroke="var(--color-text)" stroke-width="2">
+<path d="M8 44 56 12"></path>
+<path d="M34 28l10 14" stroke="var(--color-accent)"></path>
+<rect x="38" y="12" width="16" height="10" fill="var(--color-accent)" stroke="none"></rect>
+<path d="M8 44h20"></path>
+<circle cx="14" cy="38" r="4"></circle>
+</svg>
+</sc-if>
+
+<sc-if value="{{ isBulhar }}">
+<svg viewBox="0 0 64 48" style="width:100%;height:100%;max-height:100%;display:block" preserveAspectRatio="xMidYMid meet" fill="none" stroke="var(--color-text)" stroke-width="2">
+<rect x="40" y="26" width="18" height="4"></rect>
+<path d="M44 30v12M54 30v12"></path>
+<circle cx="18" cy="12" r="4"></circle>
+<path d="M18 16v8M18 24l-4 12M18 24l16 4" stroke-dasharray="0"></path>
+<path d="M14 36h-6" stroke="var(--color-accent)"></path>
+</svg>
+</sc-if>
+
+<sc-if value="{{ isVypady }}">
+<svg viewBox="0 0 64 48" style="width:100%;height:100%;max-height:100%;display:block" preserveAspectRatio="xMidYMid meet" fill="none" stroke="var(--color-text)" stroke-width="2">
+<circle cx="30" cy="10" r="4"></circle>
+<path d="M30 14v12M30 26l-12 8-2 8M30 26l12 10 4 6"></path>
+<path d="M8 44h48" stroke="var(--color-accent)"></path>
+</svg>
+</sc-if>
+
+<sc-if value="{{ isMrtvy }}">
+<svg viewBox="0 0 64 48" style="width:100%;height:100%;max-height:100%;display:block" preserveAspectRatio="xMidYMid meet" fill="none" stroke="var(--color-text)" stroke-width="2">
+<path d="M6 44h52"></path>
+<path d="M12 32h40"></path>
+<rect x="8" y="22" width="6" height="20" fill="var(--color-accent)" stroke="none"></rect>
+<rect x="50" y="22" width="6" height="20" fill="var(--color-accent)" stroke="none"></rect>
+<circle cx="32" cy="10" r="4"></circle>
+<path d="M32 14v10M32 24v8M26 24h12"></path>
+</svg>
+</sc-if>
+
+<sc-if value="{{ isRdl }}">
+<svg viewBox="0 0 64 48" style="width:100%;height:100%;max-height:100%;display:block" preserveAspectRatio="xMidYMid meet" fill="none" stroke="var(--color-text)" stroke-width="2">
+<path d="M6 44h52"></path>
+<circle cx="16" cy="12" r="4"></circle>
+<path d="M20 14 34 22M34 22v22"></path>
+<path d="M18 28h32"></path>
+<rect x="14" y="20" width="5" height="16" fill="var(--color-accent)" stroke="none"></rect>
+<rect x="48" y="20" width="5" height="16" fill="var(--color-accent)" stroke="none"></rect>
+</svg>
+</sc-if>
+
+<sc-if value="{{ isHip }}">
+<svg viewBox="0 0 64 48" style="width:100%;height:100%;max-height:100%;display:block" preserveAspectRatio="xMidYMid meet" fill="none" stroke="var(--color-text)" stroke-width="2">
+<rect x="6" y="14" width="18" height="4"></rect>
+<path d="M10 18v10M20 18v10"></path>
+<path d="M24 20 42 26M42 26l6 18"></path>
+<path d="M30 16h24"></path>
+<rect x="34" y="10" width="5" height="14" fill="var(--color-accent)" stroke="none"></rect>
+<rect x="48" y="10" width="5" height="14" fill="var(--color-accent)" stroke="none"></rect>
+<path d="M8 44h48"></path>
+</svg>
+</sc-if>
+
+<sc-if value="{{ isLytka }}">
+<svg viewBox="0 0 64 48" style="width:100%;height:100%;max-height:100%;display:block" preserveAspectRatio="xMidYMid meet" fill="none" stroke="var(--color-text)" stroke-width="2">
+<rect x="10" y="34" width="24" height="10"></rect>
+<path d="M18 34l12-4M28 30V12"></path>
+<circle cx="28" cy="8" r="4"></circle>
+<path d="M48 42V14" stroke="var(--color-accent)"></path>
+<path d="M42 20l6-6 6 6" stroke="var(--color-accent)"></path>
+</svg>
+</sc-if>
+
+<sc-if value="{{ isClean }}">
+<svg viewBox="0 0 64 48" style="width:100%;height:100%;max-height:100%;display:block" preserveAspectRatio="xMidYMid meet" fill="none" stroke="var(--color-text)" stroke-width="2">
+<path d="M10 42Q22 4 50 14" stroke="var(--color-accent)" stroke-dasharray="4 4"></path>
+<path d="M6 42h20"></path>
+<path d="M40 18h20"></path>
+<rect x="38" y="12" width="5" height="14" fill="var(--color-accent)" stroke="none"></rect>
+<rect x="57" y="12" width="5" height="14" fill="var(--color-accent)" stroke="none"></rect>
+<circle cx="18" cy="30" r="4"></circle>
+</svg>
+</sc-if>
+
+<sc-if value="{{ isVyskok }}">
+<svg viewBox="0 0 64 48" style="width:100%;height:100%;max-height:100%;display:block" preserveAspectRatio="xMidYMid meet" fill="none" stroke="var(--color-text)" stroke-width="2">
+<path d="M6 44h36"></path>
+<circle cx="24" cy="16" r="4"></circle>
+<path d="M24 20v10M24 30l-6 8M24 30l6 8M18 18l-6-6M30 18l6-6"></path>
+<path d="M54 44V12" stroke="var(--color-accent)"></path>
+<path d="M48 18l6-6 6 6" stroke="var(--color-accent)"></path>
+</svg>
+</sc-if>
+
+<sc-if value="{{ isGeneric }}">
+<svg viewBox="0 0 64 48" style="width:100%;height:100%;max-height:100%;display:block" preserveAspectRatio="xMidYMid meet" fill="none" stroke="var(--color-text)" stroke-width="2">
+<path d="M10 24h44"></path>
+<rect x="8" y="14" width="5" height="20" fill="var(--color-accent)" stroke="none"></rect>
+<rect x="51" y="14" width="5" height="20" fill="var(--color-accent)" stroke="none"></rect>
+<path d="M18 18v12M46 18v12"></path>
+</svg>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:120,&quot;height&quot;:90},&quot;which&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;bench&quot;,&quot;dbinc&quot;,&quot;dipy&quot;,&quot;ohp&quot;,&quot;zhyby&quot;,&quot;pritahy&quot;,&quot;drep&quot;,&quot;legpress&quot;,&quot;bulhar&quot;,&quot;vypady&quot;,&quot;mrtvy&quot;,&quot;rdl&quot;,&quot;hip&quot;,&quot;lytka&quot;,&quot;clean&quot;,&quot;vyskok&quot;],&quot;default&quot;:&quot;bench&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const IDS = ['bench','dbinc','dipy','ohp','zhyby','pritahy','drep','legpress','bulhar','vypady','mrtvy','rdl','hip','lytka','clean','vyskok'];
+
+class Component extends DCLogic {
+  renderVals() {
+    const w = this.props.which || 'bench';
+    const is = (k) => w === k;
+    return {
+      isBench: is('bench'), isDbinc: is('dbinc'), isDipy: is('dipy'), isOhp: is('ohp'),
+      isZhyby: is('zhyby'), isPritahy: is('pritahy'), isDrep: is('drep'), isLegpress: is('legpress'),
+      isBulhar: is('bulhar'), isVypady: is('vypady'), isMrtvy: is('mrtvy'), isRdl: is('rdl'),
+      isHip: is('hip'), isLytka: is('lytka'), isClean: is('clean'), isVyskok: is('vyskok'),
+      isGeneric: IDS.indexOf(w) < 0,
+    };
+  }
+}
+</script>
+</body>
+</html>
