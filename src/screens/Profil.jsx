@@ -12,7 +12,8 @@ const SETTINGS_ROWS = [
   ['Prístup pre trénera', '—', 'v3'],
 ];
 
-// Prefills GitHub's token form; the repository itself is picked on that page.
+// Prefilled GitHub forms for the private data repository and its token (the repository is picked on the token page).
+const REPO_URL = 'https://github.com/new?name=maximalky-data&visibility=private';
 const TOKEN_URL = 'https://github.com/settings/personal-access-tokens/new?name=Maximalky&description=Z%C3%A1loha%20appky%20Maxim%C3%A1lky&contents=write';
 
 // On <meno>.github.io the data repository is most likely <meno>/maximalky-data.
@@ -139,7 +140,12 @@ function GithubBackup() {
               <li>Platnosť nastav čo najdlhšiu, token skopíruj a vlož sem. Ostane len v tomto telefóne.</li>
             </ol>
           )}
-          {help && <a className="btn btn-secondary" href={TOKEN_URL} target="_blank" rel="noreferrer" style={{ minHeight: 44, marginTop: 10 }}>Otvoriť GitHub · nový token</a>}
+          {help && (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 8, marginTop: 10 }}>
+              <a className="btn btn-secondary" href={REPO_URL} target="_blank" rel="noreferrer" style={{ minHeight: 44 }}>1 · Vytvoriť súkromný repozitár</a>
+              <a className="btn btn-secondary" href={TOKEN_URL} target="_blank" rel="noreferrer" style={{ minHeight: 44 }}>2 · Vytvoriť token</a>
+            </div>
+          )}
         </>
       )}
     </div>
