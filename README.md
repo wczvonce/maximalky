@@ -1,25 +1,40 @@
-# CODING AGENTS: READ THIS FIRST
+# Maximálky
 
-This is a **handoff bundle** from Claude Design (claude.ai/design).
+Mobilná webová aplikácia (PWA) na zápis maximálok: kedy si sa testoval a koľko ti vyšlo. Graf vývoja 1RM, rekordy, rep-maxy, porovnanie cvikov, 16 cvikov s piktogramami a vlastné cviky s 3 až 5 obrázkami techniky.
 
-A user mocked up designs in HTML/CSS/JS using an AI design tool, then exported this bundle so a coding agent can implement the designs for real.
+- Dáta sú v telefóne (IndexedDB), appka funguje aj bez signálu.
+- Voliteľne sa zálohujú a synchronizujú do tvojho súkromného GitHub repozitára (`data.json` + `images/`).
+- Dizajn: Modernist z Claude Design — `project/Maximálky.dc.html`, konverzácie v `chats/`, pôvodný návod k exportu v `HANDOFF.md`.
 
-## What you should do — IMPORTANT
+## Spustenie na mobile (GitHub Pages)
 
-**Read the chat transcripts first.** There are 2 chat transcript(s) in `chats/`. The transcripts show the full back-and-forth between the user and the design assistant — they tell you **what the user actually wants** and **where they landed** after iterating. Don't skip them. The final HTML files are the output, but the chat is where the intent lives.
+1. Na GitHube vytvor **verejný** repozitár, napr. `maximalky`, a nahraj doň tento kód (vetva `main`).
+2. V repozitári: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+3. Po každom pushi na `main` workflow *Deploy* appku zostaví a zverejní na `https://<meno>.github.io/maximalky/`.
+4. Adresu otvor v Chrome na Androide → menu ⋮ → **Inštalovať aplikáciu** (alebo *Pridať na plochu*). Potom sa otvára ako bežná aplikácia, aj offline.
 
-**Read `project/Maximálky.dc.html` in full.** The user had this file open when they triggered the handoff, so it's almost certainly the primary design they want built. Read it top to bottom — don't skim. Then **follow its imports**: open every file it pulls in (shared components, CSS, scripts) so you understand how the pieces fit together before you start implementing.
+## Záloha a synchronizácia cez GitHub
 
-**If anything is ambiguous, ask the user to confirm before you start implementing.** It's much cheaper to clarify scope up front than to build the wrong thing.
+Kód je verejný, dáta nie — idú do samostatného **súkromného** repozitára.
 
-## About the design files
+1. Vytvor súkromný repozitár, napr. `maximalky-data` (môže byť prázdny).
+2. GitHub → Settings → Developer settings → Personal access tokens → **Fine-grained tokens** → Generate new token.
+   - Repository access: *Only select repositories* → `maximalky-data`
+   - Permissions → Repository permissions → **Contents: Read and write**
+3. V appke: Profil → Záloha na GitHub → repozitár `meno/maximalky-data` a token → Pripojiť.
 
-The design medium is **HTML/CSS/JS** — these are prototypes, not production code. Your job is to **recreate them pixel-perfectly** in whatever technology makes sense for the target codebase (React, Vue, native, whatever fits). Match the visual output; don't copy the prototype's internal structure unless it happens to fit.
+Pri spustení, po každej zmene a po návrate signálu appka stiahne `data.json`, spojí ho so záznamami v telefóne (novšia verzia záznamu vyhráva, zmazania sa prenášajú) a nahrá výsledok späť. Obrázky techniky sa ukladajú ako `images/<id>.jpg`. Token zostáva iba v telefóne.
 
-**Don't render these files in a browser or take screenshots unless the user asks you to.** Everything you need — dimensions, colors, layout rules — is spelled out in the source. Read the HTML and CSS directly; a screenshot won't tell you anything they don't.
+## Vývoj
 
-## Bundle contents
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # výstup v dist/
+```
 
-- `README.md` — this file
-- `chats/` — conversation transcripts (read these!)
-- `project/` — the `Mobilná aplikácia - Čakám na odpovede` project files (HTML prototypes, assets, components)
+- `src/screens/` — obrazovky (Domov, Zápis, Cviky, Detail, Grafy, Profil, Nový cvik)
+- `src/store.jsx` — dáta v IndexedDB a synchronizácia
+- `src/lib/github.js` — GitHub Contents API
+- `src/lib/calc.js` — odhad 1RM (Epley, Brzycki) a geometria grafu
+- `src/styles/modernist.css` — dizajn systém z exportu
