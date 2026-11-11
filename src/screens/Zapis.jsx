@@ -7,6 +7,7 @@ import { ExerciseThumb } from '../components/Pictogram.jsx';
 import { Chevron } from '../components/ui.jsx';
 
 const REPS = [1, 2, 3, 5, 8, 10];
+const MAX_REPS = 30;
 const parseNum = (s) => Number(String(s).replace(',', '.').replace(/[^0-9.]/g, ''));
 
 export default function Zapis() {
@@ -27,6 +28,10 @@ export default function Zapis() {
 
   const set = (patch) => setForm(f => ({ ...f, ...patch }));
   const reps = form.kind === 'test' || cm ? 1 : form.reps;
+
+  // Reps: quick picks, ±1 buttons, or any number typed in (e.g. 6). repsText is non-null only while typing.
+  const [repsText, setRepsText] = useState(null);
+  const setReps = (n) => set({ reps: Math.min(MAX_REPS, Math.max(1, n)), kind: 'set' });
   const value = cm ? form.weight : Math.round(est(form.weight, reps, formula) * 2) / 2;
   const over10 = !cm && reps > 10;
   const today = form.date === todayISO();
@@ -105,12 +110,26 @@ export default function Zapis() {
         <>
           <div className="pad rule">
             <div className="label">Opakovania</div>
+            <div className="stepper">
+              <button className="step-btn" aria-label="O jedno opakovanie menej" onClick={() => setReps(reps - 1)}>−1</button>
+              <input className="big-input" inputMode="numeric" pattern="[0-9]*" value={repsText ?? String(reps)} aria-label="Počet opakovaní"
+                onFocus={e => { setRepsText(String(reps)); e.target.select(); }}
+                onChange={e => {
+                  const t = e.target.value.replace(/[^0-9]/g, '').slice(0, 2);
+                  setRepsText(t);
+                  const n = parseInt(t, 10);
+                  if (n >= 1) setReps(n);
+                }}
+                onBlur={() => setRepsText(null)} />
+              <button className="step-btn plus" aria-label="O jedno opakovanie viac" onClick={() => setReps(reps + 1)}>+1</button>
+            </div>
             <div className="grid-choice" style={{ gridTemplateColumns: 'repeat(6,1fr)', marginTop: 10 }}>
               {REPS.map(n => (
                 <button key={n} className={'choice center num' + (form.kind !== 'test' && form.reps === n ? ' on' : '')}
-                  style={{ minHeight: 52, fontSize: 18 }} onClick={() => set({ reps: n, kind: 'set' })}>{n}</button>
+                  style={{ minHeight: 44, fontSize: 16 }} onClick={() => setReps(n)}>{n}</button>
               ))}
             </div>
+            <div className="muted" style={{ marginTop: 8 }}>Ťukni na rýchlu voľbu alebo napíš vlastný počet (1–{MAX_REPS}).</div>
           </div>
 
           <div className="pad rule">

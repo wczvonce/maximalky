@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { useStore } from '../store.jsx';
 import { useApp } from '../lib/appContext.js';
 import { useDerived } from '../lib/derive.js';
-import { fmt, perfLabel, paceLabel, inPeriod, dateLabel, plural } from '../lib/calc.js';
+import { fmt, perfLabel, paceLabel, inPeriod, dateLabel, plural, doneLabel, kgLabel as kg } from '../lib/calc.js';
 import { ExerciseThumb } from '../components/Pictogram.jsx';
 import { ProgressChart, PeriodSwitch, Dialog } from '../components/ui.jsx';
-
-const kg = (w, unit) => (unit === '+kg' ? '+' : '') + fmt(w) + ' kg';
 
 export default function Detail({ id }) {
   const store = useStore();
@@ -27,7 +25,6 @@ export default function Detail({ id }) {
   const max = pts.length ? Math.max(...pts.map(p => p.v)) : null;
   const steps = (ex.steps || []).filter(s => s.img || s.src || s.title);
   const photo = (s) => (s.img ? store.images[s.img] : s.src);
-  const kindText = (p) => (cm ? 'výkon' : p.kind === 'test' ? 'testované' : 'zo série');
 
   // Best weight for each rep count; a tested single counts as 1 rep.
   const repMax = {};
@@ -143,7 +140,10 @@ export default function Detail({ id }) {
             <button key={p.id} className="tap" onClick={() => setSel(p)}
               style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 12, padding: '11px 16px', borderTop: '1px solid var(--color-divider)' }}>
               <span className="num" style={{ font: '400 12px/1 var(--font-body)', color: 'var(--color-neutral-700)', minWidth: 62, whiteSpace: 'nowrap' }}>{p.d}</span>
-              <span className="num" style={{ font: '800 15px/1 var(--font-heading)', flex: 1 }}>{perfLabel(p.v, ex.unit)} · {kindText(p)}</span>
+              <span className="num" style={{ font: '800 15px/1.25 var(--font-heading)', flex: 1 }}>
+                {perfLabel(p.v, ex.unit)}{' '}
+                <span style={{ font: '400 12px/1.25 var(--font-body)', color: 'var(--color-neutral-700)' }}>· {doneLabel(p.entry, ex.unit, p.kind)}</span>
+              </span>
               <span style={{ font: '400 11px/1 var(--font-body)', color: 'var(--color-accent-700)' }}>{p.rec ? 'rekord' : ''}</span>
             </button>
           ))}

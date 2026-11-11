@@ -2,17 +2,15 @@ import React from 'react';
 import { useStore } from '../store.jsx';
 import { useApp } from '../lib/appContext.js';
 import { useDerived } from '../lib/derive.js';
-import { fmt, perfLabel, paceLabel, dateLabel, todayISO, trendColor, plural } from '../lib/calc.js';
+import { fmt, perfLabel, paceLabel, dateLabel, todayISO, trendColor, plural, doneLabel } from '../lib/calc.js';
 import { ExerciseThumb } from '../components/Pictogram.jsx';
 import { ProgressChart, Chevron } from '../components/ui.jsx';
 
-const kindLabel = (p) => (p.kind === 'test' ? 'testované' : 'zo série');
+const isSet = (p) => p.ex.unit !== 'cm' && p.kind !== 'test';
 
 function heroDetail(p) {
-  if (p.ex.unit === 'cm') return p.ex.name + ' · výkon';
-  if (p.kind === 'test') return p.ex.name + ' · testované 1RM';
-  const w = p.ex.unit === '+kg' ? '+' + fmt(p.entry.weight) : fmt(p.entry.weight);
-  return p.ex.name + ' · odhadované 1RM · ' + w + ' kg × ' + p.entry.reps;
+  const done = doneLabel(p.entry, p.ex.unit, p.kind);
+  return p.ex.name + (isSet(p) ? ' · odhadované 1RM · ' : ' · ') + done;
 }
 
 const arrow = (p) => (!p.prev ? '' : p.v > p.prev.v ? '↑' : p.v < p.prev.v ? '↓' : '→');
@@ -104,9 +102,14 @@ export default function Home() {
             <ExerciseThumb ex={p.ex} images={images} w={46} h={36} />
             <span style={{ flex: 1 }}>
               <span className="row-title">{p.ex.name}</span>
-              <span className="row-sub num">{p.d} · {kindLabel(p)}</span>
+              <span className="row-sub num">
+                {p.d} · <span style={{ color: 'var(--color-text)', fontWeight: 700 }}>{doneLabel(p.entry, p.ex.unit, p.kind)}</span>
+              </span>
             </span>
-            <span className="num" style={{ font: '800 17px/1 var(--font-heading)' }}>{perfLabel(p.v, p.ex.unit)}</span>
+            <span style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+              <span className="num" style={{ display: 'block', font: '800 17px/1 var(--font-heading)' }}>{perfLabel(p.v, p.ex.unit)}</span>
+              {isSet(p) && <span style={{ display: 'block', font: '400 10px/1 var(--font-body)', color: 'var(--color-neutral-700)', marginTop: 4 }}>odhad 1RM</span>}
+            </span>
             <span style={{ font: '800 15px/1 var(--font-heading)', color: trendColor(t), width: 14, textAlign: 'right' }}>{t}</span>
           </button>
         );

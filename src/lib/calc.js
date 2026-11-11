@@ -6,6 +6,17 @@ export const unitLabel = (unit) => (unit === '+kg' ? '+kg' : unit);
 
 export const perfLabel = (v, unit) => (unit === '+kg' ? '+' + fmt(v) + ' kg' : fmt(v) + ' ' + unit);
 
+export const kgLabel = (w, unit) => (unit === '+kg' ? '+' : '') + fmt(w) + ' kg';
+
+export const repsLabel = (n) => plural(n, 'opakovanie', 'opakovania', 'opakovaní');
+
+// What was actually lifted: "45 kg × 5 opakovaní" for a set, a short kind label otherwise.
+export function doneLabel(entry, unit, kind) {
+  if (unit === 'cm') return 'výkon';
+  if (kind === 'test') return 'testované 1RM';
+  return kgLabel(entry.weight, unit) + ' × ' + repsLabel(entry.reps);
+}
+
 export function todayISO() {
   const d = new Date();
   return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
