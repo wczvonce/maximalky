@@ -6,12 +6,17 @@ import { fmt, perfLabel, paceLabel, dateLabel, todayISO, trendColor, plural, don
 import { ExerciseThumb } from '../components/Pictogram.jsx';
 import { ProgressChart, Chevron } from '../components/ui.jsx';
 
-const isSet = (p) => p.ex.unit !== 'cm' && p.kind !== 'test';
+// Caption under the 1RM number: estimated from a set, or tested directly.
+const maxCaption = (p) => (p.ex.unit === 'cm' ? '' : p.kind === 'test' ? 'testované 1RM' : 'odhad 1RM');
 
 function heroDetail(p) {
-  const done = doneLabel(p.entry, p.ex.unit, p.kind);
-  return p.ex.name + (isSet(p) ? ' · odhadované 1RM · ' : ' · ') + done;
+  if (p.ex.unit === 'cm') return p.ex.name + ' · výkon';
+  const kind = p.kind === 'test' ? 'testované 1RM' : 'odhadované 1RM';
+  return p.ex.name + ' · ' + kind + ' · ' + doneLabel(p.entry, p.ex.unit, p.kind);
 }
+
+// The entry behind an exercise's best value (the latest one on a tie).
+const bestPoint = (pts) => (pts || []).reduce((b, p) => (!b || p.v >= b.v ? p : b), null);
 
 const arrow = (p) => (!p.prev ? '' : p.v > p.prev.v ? '↑' : p.v < p.prev.v ? '↓' : '→');
 
@@ -108,7 +113,7 @@ export default function Home() {
             </span>
             <span style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
               <span className="num" style={{ display: 'block', font: '800 17px/1 var(--font-heading)' }}>{perfLabel(p.v, p.ex.unit)}</span>
-              {isSet(p) && <span style={{ display: 'block', font: '400 10px/1 var(--font-body)', color: 'var(--color-neutral-700)', marginTop: 4 }}>odhad 1RM</span>}
+              {maxCaption(p) && <span style={{ display: 'block', font: '400 10px/1 var(--font-body)', color: 'var(--color-neutral-700)', marginTop: 4 }}>{maxCaption(p)}</span>}
             </span>
             <span style={{ font: '800 15px/1 var(--font-heading)', color: trendColor(t), width: 14, textAlign: 'right' }}>{t}</span>
           </button>
@@ -118,14 +123,24 @@ export default function Home() {
       {stale.length > 0 && (
         <>
           <div className="sec" style={{ paddingTop: 22 }}><div className="kicker">Dlho netestované</div></div>
-          {stale.map(({ e, days }) => (
-            <button key={e.id} className="tap row" onClick={() => app.openZapis(e.id)}>
-              <ExerciseThumb ex={e} images={images} w={46} h={36} />
-              <span style={{ font: '800 15px/1.2 var(--font-heading)', flex: 1 }}>{e.name}</span>
-              <span className="num" style={{ font: '400 11px/1 var(--font-body)', color: 'var(--color-neutral-700)' }}>{perfLabel(best(e.id), e.unit)}</span>
-              <span className="tag tag-accent num">{Math.floor(days / 7)} t.</span>
-            </button>
-          ))}
+          {stale.map(({ e, days }) => {
+            const bp = e.unit === 'cm' ? null : bestPoint(seriesById[e.id]);
+            return (
+              <button key={e.id} className="tap row" onClick={() => app.openZapis(e.id)}>
+                <ExerciseThumb ex={e} images={images} w={46} h={36} />
+                <span style={{ flex: 1 }}>
+                  <span className="row-title">{e.name}</span>
+                  {bp && (
+                    <span className="row-sub num">
+                      rekord · <span style={{ color: 'var(--color-text)', fontWeight: 700 }}>{doneLabel(bp.entry, e.unit, bp.kind)}</span>
+                    </span>
+                  )}
+                </span>
+                <span className="num" style={{ font: '400 11px/1 var(--font-body)', color: 'var(--color-neutral-700)' }}>{perfLabel(best(e.id), e.unit)}</span>
+                <span className="tag tag-accent num">{Math.floor(days / 7)} t.</span>
+              </button>
+            );
+          })}
         </>
       )}
       <div style={{ height: 24 }} />

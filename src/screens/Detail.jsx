@@ -142,7 +142,7 @@ export default function Detail({ id }) {
               <span className="num" style={{ font: '400 12px/1 var(--font-body)', color: 'var(--color-neutral-700)', minWidth: 62, whiteSpace: 'nowrap' }}>{p.d}</span>
               <span className="num" style={{ font: '800 15px/1.25 var(--font-heading)', flex: 1 }}>
                 {perfLabel(p.v, ex.unit)}{' '}
-                <span style={{ font: '400 12px/1.25 var(--font-body)', color: 'var(--color-neutral-700)' }}>· {doneLabel(p.entry, ex.unit, p.kind)}</span>
+                <span style={{ font: '400 12px/1.25 var(--font-body)', color: 'var(--color-neutral-700)' }}>· {!cm && p.kind === 'test' ? 'testované · 1 opakovanie' : doneLabel(p.entry, ex.unit, p.kind)}</span>
               </span>
               <span style={{ font: '400 11px/1 var(--font-body)', color: 'var(--color-accent-700)' }}>{p.rec ? 'rekord' : ''}</span>
             </button>

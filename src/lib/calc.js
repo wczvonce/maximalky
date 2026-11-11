@@ -10,11 +10,10 @@ export const kgLabel = (w, unit) => (unit === '+kg' ? '+' : '') + fmt(w) + ' kg'
 
 export const repsLabel = (n) => plural(n, 'opakovanie', 'opakovania', 'opakovaní');
 
-// What was actually lifted: "45 kg × 5 opakovaní" for a set, a short kind label otherwise.
+// What was actually lifted: "45 kg × 5 opakovaní"; a tested max is one rep. Heights have no reps.
 export function doneLabel(entry, unit, kind) {
   if (unit === 'cm') return 'výkon';
-  if (kind === 'test') return 'testované 1RM';
-  return kgLabel(entry.weight, unit) + ' × ' + repsLabel(entry.reps);
+  return kgLabel(entry.weight, unit) + ' × ' + repsLabel(kind === 'test' ? 1 : entry.reps);
 }
 
 export function todayISO() {
